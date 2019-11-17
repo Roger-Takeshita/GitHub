@@ -1,8 +1,76 @@
-# LINKS
+# <h1 id="summary">Summary</h1>
 
-- [ReadMe Editor](https://stackedit.io)
+* [VSCode Shortcuts](#shortcuts)
+* [Commands](#commands)
+* [Branch](#branch)
+* [Unstage](#unstage)
+* [Change Commit Msg](#change-commit-msg)
+* [Track/Untrack Files](#track-untrack-files)
+* [Revert Commited Files](#revert-commited-files)
+* [GitHub Gist](#github-gist)
+* [VSCode Default Editor](#vscode-default-editor)
 
-# BRANCH
+# <h1 id="shortcuts">VSCode Shortcuts</h1>
+[Go Back To Summary](#summary)
+
+### Mac
+* `CMD+Shift+V`: open README Preview in VSCode
+
+### Windows
+* `Ctrl+Alt+V`: open READMEA Preview in VSCode
+
+# <h1 id="commands">COMMANDS</h1>
+[Go Back To Summary](#summary)
+
+#### [Commands] List of Log (commits)
+
+* List all your commits
+
+```
+      git log --oneline
+```
+#### [Commands] View Commit Message
+
+```
+   git log -n <number of past commit(s)>--pretty=format:%s $hash
+```
+
+There is two ways to view your past commits
+
+1) If you want to view the last message, you can just add the `<number of past commit(s)>`, in this case `1` whitout `$hash`
+
+```
+      git log -n <number of past commit(s)>--pretty=format:%s
+```
+
+2) IF you want to view a specific commit, you use `<number of past commit(s)>` as `1` and add `$hash`
+
+```
+      git log -n 1--pretty=format:%s a63ef55
+```
+
+#### [Commands] Stash Changes (branch)
+
+* To stash all the changes whitout the need to commit/push 
+
+```
+      git stash
+```
+
+* Get back the changes from stash (branch)
+
+```
+      git stash apply   
+```
+
+#### [Commands] [Set New Remote Origin](https://help.github.com/en/articles/changing-a-remotes-url)
+
+```
+   git remote set-url origin <url>
+```
+
+# <h1 id="branch">BRANCH</h1>
+[Go Back To Summary](#summary)
 
 **[Branch] 1. Create a Branch**
 
@@ -55,56 +123,8 @@
    git push origin --delete <branch name>   (to delete remote branch)
 ```
 
-# COMMANDS
-
-#### [Commands] List of Log (commits)
-
-* List all your commits
-
-```
-      git log --oneline
-```
-#### [Commands] View Commit Message
-
-```
-   git log -n <number of past commit(s)>--pretty=format:%s $hash
-```
-
-There is two ways to view your past commits
-
-1) If you want to view the last message, you can just add the `<number of past commit(s)>`, in this case `1` whitout `$hash`
-
-```
-      git log -n <number of past commit(s)>--pretty=format:%s
-```
-
-2) IF you want to view a specific commit, you use `<number of past commit(s)>` as `1` and add `$hash`
-
-```
-      git log -n 1--pretty=format:%s a63ef55
-```
-
-#### [Commands] Stash Changes (branch)
-
-* To stash all the changes whitout the need to commit/push 
-
-```
-      git stash
-```
-
-* Get back the changes from stash (branch)
-
-```
-      git stash apply   
-```
-
-#### [Commands] [Set New Remote Origin](https://help.github.com/en/articles/changing-a-remotes-url)
-
-```
-   git remote set-url origin <url>
-```
-
-# UNSTAGE
+# <h1 id="unstage">UNSTAGE</h1>
+[Go Back To Summary](#summary)
 
 #### [Unstage] Remove From Stage - KEEP the Modifications
 
@@ -154,7 +174,8 @@ This form resets the current branch head to `<commit>` and possibly updates the 
 
 * Resets index entries and updates files in the working tree that are different between `<commit>` and HEAD. If a file that is different between `<commit>` and HEAD has local changes, reset is aborted.
 
-# CHANGE COMMIT MESSAGE
+# <h1 id="change-commit-msg">CHANGE COMMIT MESSAGE</h1>
+[Go Back To Summary](#summary)
 
 At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or burried below 10 other commits
 
@@ -201,7 +222,8 @@ At some point you’ll find yourself in a situation where you need edit a commit
 
 ⚠️ But! Remember re-pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
 
-# TRACK/UNTRACK FILES
+# <h1 id="track-untrack-files">TRACK/UNTRACK FILES</h1>
+[Go Back To Summary](#summary)
 
 * There are often times when you want to modify a file but not commit the changes, for example changing the database configuration to run on your local machine.
 
@@ -227,7 +249,8 @@ At some point you’ll find yourself in a situation where you need edit a commit
       git ls-files -v | findstr /B h
 ```
 
-# DISCARD NOT COMMITED CHANGES
+# <h1 id="discard-not-commited-changes">DISCARD NOT COMMITED CHANGES</h1>
+[Go Back To Summary](#summary)
 
 #### [Discard] Discard Local Changes
 
@@ -237,7 +260,10 @@ At some point you’ll find yourself in a situation where you need edit a commit
       git checkout -- <filename>
 ```
 
-# [REVERT COMMITED FILES](https://gist.github.com/gunjanpatel/18f9e4d1eb609597c50c2118e416e6a6)
+# <h1 id="revert-commited-files">REVERT COMMITED FILES</h1>
+[Go Back To Summary](#summary)
+
+[Original External Link](https://gist.github.com/gunjanpatel/18f9e4d1eb609597c50c2118e416e6a6)
 
 Revert local git (HEAD) to '~X'commit(s), This will revert your local git (HEAD) to this "last" commit and it'll DISCARD all your modifications. 
 X is the number of step back that you want to do. 
@@ -283,7 +309,8 @@ X is the number of step back that you want to do.
       git push origin -f
 ```
 
-# DELETE/REMOVE
+# <h1 id="delete-remove">DELETE/REMOVE</h1>
+[Go Back To Summary](#summary)
 
 #### [Delete/Remove] Remove a File from Local and Remote Repo
 
@@ -302,10 +329,30 @@ X is the number of step back that you want to do.
       git rm --cache <filename>
 ```
 
-# GitHub GIST
+# <h1 id="github-gist">GitHub GIST</h1>
+[Go Back To Summary](#summary)
 
 https://gist.github.com/Roger-Takeshita
 
 **Gist description**: A brief description about your gist
 
 **File**: Create any file just to GitHub let you create your gist
+
+# <h1 id="vscode-default-editor">Set VSCode as Default Editor</h1>
+[Go Back To Summary](#summary)
+
+### [Set VSCode as Default Editor] MAC
+* If you manually install Visual Studio Code, rather than using Homebrew, you will need to add the code executable to your PATH.
+
+```
+      brew cask install visual-studio-code
+```
+
+* **In terminal**
+   1) Type: `open ~/.bash_profile`
+   2) Delete everything and insert: `export EDITOR="code -w"`
+
+* **In visual studio code**
+
+   1) Press: `CMD + SHIFT + P`
+   2) Insert: install code and select from autocomplete menu shell command: `Install 'code'` in command PATH
