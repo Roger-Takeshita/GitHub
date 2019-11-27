@@ -245,9 +245,18 @@ At some point you’ll find yourself in a situation where you need edit a commit
 
 * If you  forgot what file did you `--assume-unchanged`, you can call the list using the following command:
 
-```
+* Windows command
+
+```bash
       git ls-files -v | findstr /B h
 ```
+
+* Mac/Unix Command
+
+```bash
+      git ls-files -v | grep '^h'
+```
+
 
 # <h1 id="discard-not-commited-changes">DISCARD NOT COMMITED CHANGES</h1>
 [Go Back To Summary](#summary)
