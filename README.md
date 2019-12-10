@@ -7,6 +7,7 @@
 * [Change Commit Msg](#change-commit-msg)
 * [Track/Untrack Files](#track-untrack-files)
 * [Revert Commited Files](#revert-commited-files)
+* [Delete Commited Files](#delete-commit)
 * [GitHub Gist](#github-gist)
 * [VSCode Default Editor](#vscode-default-editor)
 
@@ -302,20 +303,76 @@ X is the number of step back that you want to do.
 ```
       git revert {commit_id}
 ```
+# <h1 id="delete-commit">DELETE COMMITED FILES</h1>
+[Go Back To Summary](#summary)
 
-#### [Revert] Delete the Last Commit
+#### [Delete Commit] Delete Commited Files
 
-* Deleting the last commit is the easiest case. Let's say we have a remote origin with branch master that currently points to commit dd61ab32. We want to remove the top commit. Translated to git terminology, we want to force the master branch of the origin remote repository to the parent of dd61ab32:
-
+* 1) Log all the pushed/commited files:
+```bash
+      git log --online
 ```
-      git push origin +dd61ab32^:master
+
+```bash
+      268186e (HEAD -> master, origin/master, origin/HEAD) remove
+      3bdb527 Week 4, Day 1 - Exercise 2 - Express
+      1002de7 Week 4, Day 1 - Exercise 1 - Node
+      5ed3cc5 rename folders
+      bec7979 rename folders
+      a6f5fe2 Week 4, Day 1 - Exercise 3 - Lab Express
+      b707a70 Week 4, Day 1 - Exercise 2 - Express
+      e10d893 Week 4, Day 1 - Exercise 1 - Node
+      b92f8b6 Week 4, Day 1 - Exercise 3 - Lab Express
+      1ad7b97 Week 4, Day 1 - Exercise 2 - Express
+      05694f2 Week 4, Day 1 - Exercise 1 - Node
 ```
 
-* Where git interprets x^ as the parent of x and + as a forced non-fastforward push. If you have the master branch checked out locally, you can also do it in two simpler steps: First reset the branch to the parent of the current commit, then force-push it to the remote.
+* 2) Copy all the hashs that you want to delete from github
 
+```bash
+      268186e
+      3bdb527
+      1002de7
+      5ed3cc5
+      bec7979
+      a6f5fe2
+      b707a70
+      e10d893
+      b92f8b6
+      1ad7b97
+      05694f2
 ```
-      git reset HEAD^ --hard
-      git push origin -f
+
+* 3) Revert the HEAD as many times you need:
+
+```bash
+      git reset HEAD~1        #this will revert the HEAD 1 commit 
+
+      In this example, we are going to use 
+
+      git reset HEAD~11       #this will revert the HEAD 11 commits 
+```
+
+* 4) Delete from GitHub
+
+```bash
+      git push origin +268186e^:master
+      git push origin +3bdb527^:master
+      git push origin +1002de7^:master
+      git push origin +5ed3cc5^:master
+      git push origin +bec7979^:master
+      git push origin +a6f5fe2^:master
+      git push origin +b707a70^:master
+      git push origin +e10d893^:master
+      git push origin +b92f8b6^:master
+      git push origin +1ad7b97^:master
+      git push origin +05694f2^:master
+```
+
+* 5) Double check if everything went all right:
+```bash
+      git pull origin master
+      git status
 ```
 
 # <h1 id="delete-remove">DELETE/REMOVE</h1>
