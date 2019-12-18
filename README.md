@@ -14,6 +14,8 @@
 * [Stash](#git-stash)
   * [Stash Uncommitted Changes](#git-stash-changes)
   * [Stash Apply Changes](#git-stash-apply)
+  * [Stash Show Files](#git-stash-show)
+  * [Stash Drop Changes](#git-stash-drop)
 * [Branch](#branch)
 * [Dicard Changes - Not Committed](#discard-not-committed-changes)
 * [Unstage](#unstage)
@@ -157,6 +159,25 @@
 
    ```bash
       git stash apply   
+   ```
+<h4 id="git-stash-show">Stash Show Files</h4>
+
+[Go Back To Summary](#summary)
+
+* Show all the files that you have stashed
+  
+   ```bash
+      git stash show
+   ```
+
+<h4 id="git-stash-drop">Stash Drop Changes</h4>
+
+[Go Back To Summary](#summary)
+
+* `git stash drop` will discard all the stashed files
+
+   ```bash
+      git stash drop
    ```
 
 <h1 id="branch">BRANCH</h1>
