@@ -35,7 +35,8 @@
   * [List Ignored Files](#list-ignored-files)
 * [Fetch Modifications From Branch/Remote Apply to Local](#fetch-modifications)
 * [Revert Full Commit](#revert-full-commit)
-* [Delete Committed Files](#delete-committed-files)
+* [Delete Pushed Files From Repo](#delete-pushed-files)
+* [Change File Path From Remote](#change-file-path)
 * [GitHub Gist](#github-gist)
 
 <h1 id="shortcuts">VSCODE SHORTCUTS</h1>
@@ -455,7 +456,7 @@
       git revert {commit_id}
    ```
 
-<h1 id="delete-committed-files">DELETE COMMITTED FILES</h1>
+<h1 id="delete-pushed-files">DELETE COMMITTED FILES</h1>
 
 [Go Back To Summary](#summary)
 
@@ -527,6 +528,43 @@
       git pull origin master
       git status
    ```
+
+<h1 id="change-file-path">Change File Path From Repo</h1>
+
+* ⚠️ Before you continue, read all the steps first to understand what will happen to your files/git history.
+* If you want to rename or change the file path from repo, first you have to change the file locally and then push the modifications to your repo.
+
+* 1) Use `git rm <./origin path/file> <./destination path/file>`
+
+   ```bash
+      # Example:
+      
+      git mv SCHEDULE.md work/      # Moving SCHEDULE.md from root to folder 'work'
+   ```
+
+  * You can rename the file during this process, you just need to change the file name.
+  
+* 2) `git status`, you will see that git renamed the file and added to stage
+  
+   ```bash
+      Changes to be committed:
+         (use "git reset HEAD <file>..." to unstage)
+
+	   renamed:    SCHEDULE.md -> work/SCHEDULE.md
+   ```
+
+* 3) Add a commit message `git commit -m "your message"`
+* 4) `git push origin master`
+
+* If you check your git history on github, you won't see the previous commits, you will only see your last commit.
+  * ⚠️ So far I haven't found a command that can migrate the git history with the destination path/file. One way to view the past commits (before you moved your files) is to use `--follow`. On terminal:
+
+   ```bash
+      git log --follow --oneline <./path/file>
+   ```
+   * This command accepts only one file
+   * I doesn't matter if you renamed the file 
+
 
 <h1 id="github-gist">GitHub GIST</h1>
 
