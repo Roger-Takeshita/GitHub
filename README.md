@@ -24,6 +24,7 @@
   * [Remove All From Stage - DISCARD the Modifications](#git-reset-head)
   * [Reset HEAD to Last Commit - DISCARD the Modificaions](#git-reset-hard-2)
   * [Reset [mode] [commit]](#git-reset-modes)
+* [Delete a Commit Not Pushed - KEEP the Modifications](#delete-commit-not-pushed-keep-changes)
 * [Change Commit Msg](#change-commit-msg)
   * [Change Commit Message - Not Pushed](#git-commit-msg-not-pushed)
   * [Change Commit Message - Already Pushed](#git-commit-msg-already-pushed)
@@ -334,6 +335,15 @@
 * **`--keep`**
 
   * Resets index entries and updates files in the working tree that are different between `<commit>` and HEAD. If a file that is different between `<commit>` and HEAD has local changes, reset is aborted.
+
+<h1 id='delete-commit-not-pushed-keep-changes'>Delete a Commit Not Pushed - KEPP the Modifications</h1>
+
+[Go Back to Summary](#summary)
+
+   ```Bash
+      git reset HEAD^
+   ```
+  * `HEAD^` refers to the (first) parent commit of your current commit (in your local repo)
 
 <h1 id="change-commit-msg">CHANGE COMMIT MESSAGE</h1>
 
