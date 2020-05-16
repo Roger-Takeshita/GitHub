@@ -1,100 +1,199 @@
 <h1 id="summary">Summary</h1>
 
-* [VSCode Shortcuts](#shortcuts)
-  * [Preview Markdown Mac](#shortcut-mac)
-  * [Preview Markdown Windows](#shortcut-win)
-* [Set VSCode as Default Editor](#vscode-default-editor)
-  * [Default Editor - MAC](#defaul-editor-mac)
-* [Commands](#commands)
-  * [Log Commits](#git-log)
-  * [Log Commits Message Only](#git-log-msg)
-  * [Set New Remote Origin](#git-set-origin)
-  * [Set Upstream](#git-upstream)
-  * [Check Remote/Upstream URL](#git-check-remote)
-* [Stash](#git-stash)
-  * [Stash Uncommitted Changes](#git-stash-changes)
-  * [Stash Apply Changes](#git-stash-apply)
-  * [Stash Show Files](#git-stash-show)
-  * [Stash Drop Changes](#git-stash-drop)
-* [Branch](#branch)
-* [Dicard Changes - Not Committed](#discard-not-committed-changes)
-* [Unstage](#unstage)
-  * [Remove All From Stage - KEEP the Modifications](#git-reset-head-file)
-  * [Rmove a Specific File From Stage - KEEP the Modifications](#git-reset-file)
-  * [Remove All From Stage - DISCARD the Modifications](#git-reset-head)
-  * [Reset HEAD to Last Commit - DISCARD the Modificaions](#git-reset-hard-2)
-  * [Reset [mode] [commit]](#git-reset-modes)
-* [Delete a Commit Not Pushed - KEEP the Modifications](#delete-commit-not-pushed-keep-changes)
-* [Change Commit Msg](#change-commit-msg)
-  * [Change Commit Message - Not Pushed](#git-commit-msg-not-pushed)
-  * [Change Commit Message - Already Pushed](#git-commit-msg-already-pushed)
-  * [Change Commit Message - Not Pushed + Old Commit](#git-commit-msg-already-not-pushed-old)
-  * [Change Commit Message - Already Pushed + Old Commit](#git-commit-msg-pushed-old)
-* [Track/Untrack Files](#track-untrack-files)
-  * [Untrack Pushed File (Like .gitignore)](#untrack-pushed-files)
-  * [Track Back Ingnored Files](#track-back-pushed-files)
-  * [List Ignored Files](#list-ignored-files)
-* [Fetch Modifications From Branch/Remote Apply to Local](#fetch-modifications)
-* [Revert Full Commit](#revert-full-commit)
-* [Delete Pushed Files From Repo](#delete-pushed-files)
-* [Change File Path From Remote](#change-file-path)
-* [GitHub Gist](#github-gist)
+-   [VSCode Shortcuts](#shortcuts)
+    -   [Preview Markdown Mac | CMD+Shift+V](#shortcut-mac)
+    -   [Preview Markdown Windows | Ctrl+Alt+V](#shortcut-win)
+-   [Set VSCode as Default Editor](#vscode-default-editor)
+    -   [Default Editor - MAC](#defaul-editor-mac)
+-   [COMMANDS](#commands)
+
+    -   [REMOTE](#remote)
+
+        -   [Set New Remote Origin | git remote set-url origin](#git-set-origin)
+        -   [Set New Remote Upstream | git remote add upstream](#git-upstream)
+        -   [Check Remote/Upstream URL | git remote -v](#git-check-remote)
+
+    -   [FETCH/PULL](#fetchpull)
+
+        -   [Check All Modifications from Remote (Origin) | git fetch](#fetch-modifications)
+        -   [Download All Modifications from Remote (Origin/Branch) | git pull origin master](#pullmodification)
+
+    -   [LOGS](#logs)
+
+        -   [Log Commits (One Line) | git log --oneline](#git-log)
+        -   [Log Commits Message Only | git log -1 --pretty=format:%s](#git-log-msg)
+
+    -   [STASH](#git-stash)
+
+        -   [Stash Uncommitted Files/Changes | git stash](#git-stash-changes)
+        -   [Apply Stashed Files/Changes | git stash apply](#git-stash-apply)
+        -   [Show Stashed Files/Changes | git stash show](#git-stash-show)
+        -   [Delete Stashed Files/Changes | git stash drop](#git-stash-drop)
+
+    -   [TRACK/UNTRACK FILES](#track-untrack-files)
+
+        -   [Untrack Pushed File (Similar to .gitignore) | git update-index --assume-unchanged](#untrack-pushed-files)
+        -   [Track Back Ignored Files | git update-index --no-assume-unchanged](#track-back-pushed-files)
+        -   [List Untracked Files](#list-untracked-files)
+            -   [Windows Command | git ls-files -v | findstr /B h](#untrackwindows)
+            -   [Mac/Unix Command | git ls-files -v | grep '^h'](#untrackunix)
+
+    -   [CHANGE COMMIT MESSAGE](#change-commit-msg)
+
+        -   [Change Commit Message - Not Pushed | git commit --amend](#git-commit-msg-not-pushed)
+        -   [Change Commit Message - Already Pushed | git commit --amend](#git-commit-msg-already-pushed)
+        -   [Change Commit Message - Not Pushed + Old Commit](#git-commit-msg-already-not-pushed-old)
+        -   [Change Commit Message - Already Pushed + Old Commit](#git-commit-msg-pushed-old)
+
+    -   [BRANCH](#branch)
+
+        -   [Create a Branch | git branch](#createbranch)
+        -   [List All Branches local/remote | git branch -a](#listbranches)
+        -   [Switch to Branch | git checkout](#switchtobranch)
+        -   [Create and Switch to Branch (in One Command) | git checkout -b](#xxxxxxxxxx)
+        -   [Push a Branch | git push origin](#pushbranch)
+        -   [Merge a Branch to Master | git merge](#mergebranch)
+        -   [Delete a Branch | git branch -d](#deletebranch)
+
+    -   [DISCARD CHANGES](#discard)
+
+        -   [Discard Changes - Not Staged | git checkout --](#discard-not-committed-changes)
+
+    -   [UNSTAGE](#unstage)
+
+        -   [Remove All From Stage - KEEP the Modifications | git reset](#git-reset-head-file)
+        -   [Remove a Specific File From Stage - KEEP the Modifications | git reset](#git-reset-file)
+
+    -   [RESET](#reset)
+
+        -   [Remove All From Stage - DISCARD the Modifications | git --hard reset HEAD](#git-reset-head)
+        -   [Reset HEAD to X Commits - DISCARD the Modifications | git reset --hard HEAD~1](#git-reset-hard-2)
+
+    -   [DELETE](#delete)
+
+        -   [Delete a Commit Not Pushed - KEEP the Modifications | git reset HEAD^](#delete-commit-not-pushed-keep-changes)
+        -   [Delete Pushed Files From Repo | git push origin +268186e^:master](#delete-pushed-files)
+
+    -   [REVERT](#revert)
+
+        -   [Revert Full Commit | git revert {hash key}](#revert-full-commit)
+
+-   [GitHub Gist](#github-gist)
+-   [Heroku](#heroku)
+
+    -   [LOGIN/CREATE](#logincreate)
+
+        -   [Login | heroku login](#herokulogin)
+        -   [Create App | heroku create](#herokucreate)
+        -   [Associate Existing Heroku App | heroku git:remote -a](#associateapp)
+
+    -   [DEPLOY](#deploy)
+
+        -   [Deploy to GitHub - Repo | git push heroku master](#deploytogit)
+        -   [Deploy to GitHub - Subtree](#deploytogitsubtree)
 
 <h1 id="shortcuts">VSCODE SHORTCUTS</h1>
 
-<h3 id="shortcut-mac">Preview Markdown Mac</h3>
+<h2 id="shortcut-mac">Preview Markdown Mac</h2>
 
 [Go Back To Summary](#summary)
 
-* `CMD+Shift+V`: open README Preview in VSCode
+-   `CMD+Shift+V`: open README Preview in VSCode
 
-<h3 id="shortcut-win">Preview Markdown Windows</h3>
+<h2 id="shortcut-win">Preview Markdown Windows</h2>
 
 [Go Back To Summary](#summary)
 
-* `Ctrl+Alt+V`: open README Preview in VSCode
+-   `Ctrl+Alt+V`: open README Preview in VSCode
 
 <h1 id="vscode-default-editor">SET VSCODE AS DEFAULT EDITOR</h1>
 
-<h4 id="defaul-editor-mac">Default Editor - MAC</h4>
+<h2 id="defaul-editor-mac">Default Editor - MAC</h2>
 
 [Go Back To Summary](#summary)
 
-* If you manually install Visual Studio Code, rather than using Homebrew, you will need to add the code executable to your PATH.
+-   If you manually install Visual Studio Code, rather than using Homebrew, you will need to add the code executable to your PATH.
 
-   ```bash
+```bash
       brew cask install visual-studio-code
-   ```
+```
 
-* **In terminal**
+-   **In terminal**
 
-   1. Type: `open ~/.bash_profile`
-   2. Delete everything and insert: `export EDITOR="code -w"`
+    1. Type: `open ~/.bash_profile`
+    2. Delete everything and insert: `export EDITOR="code -w"`
 
-* **In visual studio code**
+-   **In visual studio code**
 
-   1. Press: `CMD + SHIFT + P`
-   2. Insert: install code and select from autocomplete menu shell command: `Install 'code'` in command PATH
+    1. Press: `CMD + SHIFT + P`
+    2. Insert: install code and select from autocomplete menu shell command: `Install 'code'` in command PATH
 
-<h1 id="commands">COMMANDS</h1>
+<h1 id="commands">Commands</h1>
 
-<h4 id="git-log">Log Commits</h4>
+<h2 id='remote'>REMOTE</h2>
+
+<h3 id="git-set-origin"><a href="https://help.github.com/en/articles/changing-a-remotes-url">Set New Remote Origin</a></h3>
 
 [Go Back To Summary](#summary)
 
-* List all commits (enteire log)
- 
-   ```bash
-      git log
-   ```
+-   If you need to change the remote url
 
-* List all commits (**simple log**)
- 
-   ```bash
+```bash
+      git remote set-url origin <url>
+```
+
+<h3 id="git-upstream">Set New Remote Upstream</h3>
+
+[Go Back To Summary](#summary)
+
+```bash
+   git remote add upstream <url>
+```
+
+<h3 id="git-check-remote">Check Remote/Upstream URL</h3>
+
+[Go Back To Summary](#summary)
+
+```bash
+   git remote -v
+```
+
+<h2 id='fetchpull'>FETCH/PULL MODIFICATIONS</h2>
+
+<h3 id="fetch-modifications">Check All Modifications from Remote (Origin)</h3>
+
+[Go Back To Summary](#summary)
+
+-   Fetch all the remote files that have been changed (just the paths)
+-   It doesn't download the modifications
+
+```bash
+      git fetch
+```
+
+<h3 id='pullmodification'>Download All Modifications from Remote (Origin/Branch)</h3>
+
+[Go Back to Summary](#summary)
+
+-   Pull all the modified files
+
+```bash
+      git pull origin master/branch
+```
+
+<h2 id='logs'>LOGS</h2>
+
+<h3 id="git-log">Log Commits (One Line) </h3>
+
+[Go Back To Summary](#summary)
+
+-   List all commits in one line, useful to get `hash keys`
+
+```bash
       git log --oneline
-   ```
+```
 
-<h4 id="git-log-msg">Log Commit Message</h4>
+<h3 id="git-log-msg">Log Commits Message Only</h3>
 
 [Go Back To Summary](#summary)
 
@@ -102,320 +201,79 @@
    git log -n --pretty=format:%s $hash
 ```
 
-* **Option 1)** If you want to view the last message, you can just add the `-n` = **number of past commit(s)**, whitout `$hash`. Example:
+-   **Option 1)** If you want to view the last message, you can just add the `-n` = **number of past commit(s)**, whitout `$hash`. Example:
 
-   ```bash
+```bash
       git log -1 --pretty=format:%s
-   ```
+```
 
-* **Option 2)** IF you want to view a specific commit, you use `-n` = `1` and `$hash` = `hash key`
+-   **Option 2)** IF you want to view a specific commit, you use `-n` = `1` and `$hash` = `hash key`
 
-   ```bash
+```bash
       git log -n 1--pretty=format:%s a63ef55
-   ```
+```
 
-   * `a63ef55` is my hash key
+-   `a63ef55` is my hash key
 
-<h4 id="git-set-origin"><a href="https://help.github.com/en/articles/changing-a-remotes-url">Set New Remote Origin</a></h4>
+<h2 id="git-stash">STASH</h2>
 
-[Go Back To Summary](#summary)
-
-* If you need to change the remote url
-
-   ```bash
-      git remote set-url origin <url>
-   ```
-
-<h4 id="git-upstream">Set Remove Upstream</h4>
+<h3 id="git-stash-changes">Stash Uncommitted Files/Changes</h3>
 
 [Go Back To Summary](#summary)
 
-   ```bash
-      git remote add upstream <url>
-   ```
+-   To stash all the changes without the need to commit/push
 
-<h4 id="git-check-remote">Check Remote/Upstream URL</h4> 
+```bash
+   git stash
+```
 
-[Go Back To Summary](#summary)
-
-   ```bash
-      git remote -v
-   ```
-<h1 id="git-stash">STASH</h1>
-
-<h4 id="git-stash-changes">Stash Uncommitted Changes</h4>
+<h3 id="git-stash-apply">Apply Stashed Files/Changes</h3>
 
 [Go Back To Summary](#summary)
 
-* To stash all the changes whitout the need to commit/push 
+-   To apply back the changes
 
-   ```bash
-      git stash
-   ```
+```bash
+      git stash apply
+```
 
-<h4 id="git-stash-apply">Stash Apply Changes</h4>
-
-[Go Back To Summary](#summary)
-
-* To apply back the changes
-
-   ```bash
-      git stash apply   
-   ```
-<h4 id="git-stash-show">Stash Show Files</h4>
+<h3 id="git-stash-show">Show Stashed Files/Changes</h3>
 
 [Go Back To Summary](#summary)
 
-* Show all the files that you have stashed
-  
-   ```bash
+-   Show all the files that you have stashed
+
+```bash
       git stash show
-   ```
+```
 
-<h4 id="git-stash-drop">Stash Drop Changes</h4>
+<h3 id="git-stash-drop">Delete Stashed Files/Changes</h3>
 
 [Go Back To Summary](#summary)
 
-* `git stash drop` will discard all the stashed files
+-   Discard all the stashed files/changes
 
-   ```bash
+```bash
       git stash drop
-   ```
+```
 
-<h1 id="branch">BRANCH</h1>
-
-[Go Back To Summary](#summary)
-
-* **1. Create a Branch**
-
-   ```bash
-      git branch <branch name>
-   ```
-
-* **2. List Branches**
-
-   2.1 List all my local branches
-
-   ```bash
-      git branch
-   ```
-
-   2.2 Lista all my branches (local/remote)
-
-   ```bash
-      git branch -a
-   ```
-
-* **3. To Work on a Branch**
-
-   ```bash
-      git checkout <branch name>
-   ```
-* **1. [Alternative] Create a Branch and Checkout to the New Branch**
-
-   ```bash
-      git checkout -b <branch name>
-   ```
-
-* **4. After You've Made the Changes on the Branch**
-
-   ```bash
-      git add -A
-      git commit -m "message"
-   ```
-
-* **5. After Commit, Push Branch to Remote (Origin/Branch)**
-
-   ```bash
-      git push origin <branch name>
-   ```
-
-* **6. Merge a Branch to Local HEAD (Master) and Push to Master to Remote (Origin)**
-
-   ```bash
-      git checkout master       # to change to master branch
-      git pull origin master    # just to be sure that local master is up to date
-      git branch --merged       # to check if the branch was merged, right now is just "master"
-      git merge <branch name>   # to merge the changes to local master
-      git branch --merged       # to check if the branch was merged
-      git push origin master    # to push this changes to remote master
-   ```
-
-* **7. Delete Branch After You Finish Using this Feature**
-
-   ```bash
-      git branch -d <branch name>              # to delete local branch
-      git push origin --delete <branch name>   # to delete remote branch
-   ```
-
-<h1 id="discard-not-committed-changes">DISCARD CHANGES - NOT COMMITTED</h1>
+<h2 id="track-untrack-files">TRACK/UNTRACK FILES</h2>
 
 [Go Back To Summary](#summary)
 
-* To revert the file back to the state it was in before the changes. This will put your local git (HEAD) on your last commit and will erase all your modifications.
+-   There are often times when you want to modify a file but not commit the changes, for example changing the database configuration to run on your local machine.
 
-   ```bash
-      git checkout -- <filename>
-   ```
+-   Adding the file to .gitignore doesn’t work, because the file is already tracked. Luckily, Git will allow you to manually “ignore” changes to a file or directory.
 
-<h1 id="unstage">UNSTAGE</h1>
+<h3 id="untrack-pushed-files">Untrack Pushed File (Similar to .gitignore)</h3>
 
 [Go Back To Summary](#summary)
 
-* Remove from stage (after `git add -A` , `git add <file>` or `git add .`) - **NOT COMMITTED FILES**
-  
-<h4 id="git-reset-head-file">Remove All From Stage - <strong>KEEP</strong> the Modifications</h4>
+```bash
+   git update-index --assume-unchanged <filename>
+```
 
-[Go Back To Summary](#summary)
-
-* To remove files from stage use `reset HEAD`. This will unstage the file(s) and **KEEP** all the modifications.
-
-   ```bash
-      git reset
-
-      #or
-
-      git reset HEAD          # unstage all files
-   ```
-
-<h4 id="git-reset-file">Remove a Specific File From Stage - <strong>KEEP</strong> the Modifications</h4>
-
-[Go Back To Summary](#summary)
-
-* Remove from stage (after `git add -A` or `git add <filename>`). This will unstage the file and **KEEP** all the modifications.
-
-   ```bash
-      git reset <filename>    # unstage a specific file
-   ```
-
-<h4 id="git-reset-head">Remove All From Stage - <strong>DICARD</strong> the Modifications</h4>
-
-[Go Back To Summary](#summary)
-
-* To remove files from stage use `reset HEAD`. This will unstage the file(s) and **DISCARD** all the modifications.
-
-   ```bash
-      git --hard reset HEAD          # unstage all files
-   ```
-
-<h4 id="git-reset-hard-2">Reset HEAD to Last Commit - <strong>DISCARD</strong> the Modifications</h4>
-
-[Go Back To Summary](#summary)
-
-* This will **DISCARD** all the modifications and will set the HEAD to your previous commit(s).
-
-   ```bash
-      git reset --hard HEAD~1        # reset last commit
-   ```
-   * `~1` is the number of commit(s)
-
-<h4 id="git-reset-modes"><a href="https://gist.github.com/CrookedNumber/8964442">Reset [mode] [commit]</a></h4>
-
-[Go Back To Summary](#summary)
-
-* This form resets the current branch head to `<commit>` and possibly updates the index (resetting it to the tree of `<commit>`) and the working tree depending on `<mode>`. If `<mode>` is omitted, defaults to `--mixed`. The `<mode>` must be one of the following:
-
-* **`--soft`**
-
-  * Does not touch the index file or the working tree at all (but resets the head to `<commit>`, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
-
-* **`--mixed`**
-
-  * Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action.
-  * If `-N` is specified, removed paths are marked as intent-to-add (see git-add[1]).
-
-* **`--hard`**
-  * Resets the index and working tree. Any changes to tracked files in the working tree since `<commit>` are **DISCARDED**.
-
-* **`--merge`**
-
-  * Resets the index and updates the files in the working tree that are different between `<commit>` and HEAD, but keeps those which are different between the index and working tree (i.e. which have changes which have not been added). If a file that is different between `<commit>` and the index has unstaged changes, reset is aborted.
-  * In other words, `--merge` does something like a git read-tree `-u -m <commit>`, but carries forward unmerged index entries.
-
-* **`--keep`**
-
-  * Resets index entries and updates files in the working tree that are different between `<commit>` and HEAD. If a file that is different between `<commit>` and HEAD has local changes, reset is aborted.
-
-<h1 id='delete-commit-not-pushed-keep-changes'>Delete a Commit Not Pushed - KEPP the Modifications</h1>
-
-[Go Back to Summary](#summary)
-
-   ```Bash
-      git reset HEAD^
-   ```
-  * `HEAD^` refers to the (first) parent commit of your current commit (in your local repo)
-
-<h1 id="change-commit-msg">CHANGE COMMIT MESSAGE</h1>
-
-[Go Back To Summary](#summary)
-
-* At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or burried below 10 other commits
-
-<h4 id="git-commit-msg-not-pushed">Change Commit Message - Not Pushed</h4>
-
-[Go Back To Summary](#summary)
-
-* This will open your $EDITOR and let you change the message. Continue with your usual git push origin master.
-
-   ```bash
-      git commit --amend
-   ```
-
-<h4 id="git-commit-msg-already-pushed">Change Commit Message - Already Pushed</h4>
-
-[Go Back To Summary](#summary)
-
-* We edit the message like just above. But need to `--force` the push to update the remote history.
-
-* ⚠️ But! Force pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
-
-   ```bash
-      git commit --amend
-      git push origin master --force
-   ```
-
-<h4 id="git-commit-msg-already-not-pushed-old">Change Commit Message - Not Pushed + Old Commit</h4>
-
-[Go Back To Summary](#summary)
-
-* Rebase opened your history and let you pick what to change. With edit you tell you want to change the message. Git moves you to a new branch to let you `--amend` the message. git rebase `--continue` puts you back in your previous branch with the message changed.
-
-   ```bash
-      git rebase -i HEAD~X       # X is the number of commits to go back
-                                 # Move to the line of your commit, change pick into edit
-      git commit --amend         # Change your commit message
-      git rebase --continue      # Finish the rebase
-   ```
-
-<h4 id="git-commit-msg-pushed-old">Change Commit Message - Already Pushed + Old Commit</h4>
-
-[Go Back To Summary](#summary)
-
-* Edit your message with the same 3 steps process as above (`rebase -i, commit --amend, rebase --continue`). Then force push the commit:
-
-   ```bash
-      git push origin master --force
-   ```
-
-⚠️ But! Remember re-pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
-
-<h1 id="track-untrack-files">TRACK/UNTRACK FILES</h1>
-
-[Go Back To Summary](#summary)
-
-* There are often times when you want to modify a file but not commit the changes, for example changing the database configuration to run on your local machine.
-
-* Adding the file to .gitignore doesn’t work, because the file is already tracked. Luckily, Git will allow you to manually “ignore” changes to a file or directory.
-
-<h4 id="untrack-pushed-files">Untrack Pushed File (Like .gitignore)</h4>
-
-[Go Back To Summary](#summary)
-
-   ```bash
-      git update-index --assume-unchanged <filename>
-   ```
-
-<h4 id="track-back-pushed-files">Track Back Ingnored Files</h4>
+<h3 id="track-back-pushed-files">Track Back Ignored Files</h3>
 
 [Go Back To Summary](#summary)
 
@@ -423,60 +281,241 @@
    git update-index --no-assume-unchanged <filename>
 ```
 
-<h4 id="list-ignored-files">List Ignored Files</h4>
+<h3 id="list-untracked-files">List Untracked Files</h3>
 
 [Go Back To Summary](#summary)
 
-* If you  forgot what file did you `--assume-unchanged`, you can call the list using the following command:
+-   If you forgot what file did you `--assume-unchanged`, you can call the list using the following command:
 
-* Windows Command
+<h4 id='untrackwindows'>Windows Command</h4>
 
 ```bash
-      git ls-files -v | findstr /B h
+   git ls-files -v | findstr /B h
 ```
 
-* Mac/Unix Command
+<h4 id='untrackunix'>Mac/Unix Command</h4>
 
 ```bash
-      git ls-files -v | grep '^h'
+   git ls-files -v | grep '^h'
 ```
 
-<h1 id="fetch-modifications">FETCH MODIFICATIONS FROM BRANCH/REMOTE APPLY TO LOCAL</h1>
+<h2 id="change-commit-msg">CHANGE COMMIT MESSAGE</h2>
+
+-   At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or burried below 10 other commits
+
+<h3 id="git-commit-msg-not-pushed">Change Commit Message - <strong>Not Pushed</strong></h3>
 
 [Go Back To Summary](#summary)
 
-* Fetch all the remote files that have been changed (just the paths)
-   ```bash
-      git fetch
-   ```
+-   This will open your \$EDITOR and let you change the message. Continue with your usual git push origin master.
 
-* Pull all the modified files
+```bash
+      git commit --amend
+```
 
-   ```bash
-      git pull origin master/branch
-   ```
-
-<h1 id="revert-full-commit">REVERT FULL COMMIT</h1>
+<h3 id="git-commit-msg-already-pushed">Change Commit Message - <strong>Already Pushed</strong></h3>
 
 [Go Back To Summary](#summary)
 
-* Sometimes you may want to undo a whole commit with all changes. Instead of going through all the changes manually, you can simply tell git to revert a commit, which does not even have to be the last one. Reverting a commit means to create a new commit that undoes all changes that were made in the bad commit. Just like above, the bad commit remains there, but it no longer affects the the current master and any future commits on top of it.
+-   We edit the message like just above. But need to `--force` the push to update the remote history.
 
-   ```bash
-      git revert {commit_id}
-   ```
+-   ⚠️ But! Force pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
 
-<h1 id="delete-pushed-files">DELETE COMMITTED FILES</h1>
+```bash
+      git commit --amend
+      git push origin master --force
+```
+
+<h3 id="git-commit-msg-already-not-pushed-old">Change Commit Message - <strong>Not Pushed + Old Commit</strong></h3>
 
 [Go Back To Summary](#summary)
 
-* 1) Log all the pushed/committed files:
+-   Rebase opened your history and let you pick what to change. With edit you tell you want to change the message. Git moves you to a new branch to let you `--amend` the message. git rebase `--continue` puts you back in your previous branch with the message changed.
 
-   ```bash
+```bash
+      git rebase -i HEAD~X       # X is the number of commits to go back
+                                 # Move to the line of your commit, change pick into edit
+      git commit --amend         # Change your commit message
+      git rebase --continue      # Finish the rebase
+```
+
+<h3 id="git-commit-msg-pushed-old">Change Commit Message - <strong>Already Pushed + Old Commit</strong></h3>
+
+[Go Back To Summary](#summary)
+
+-   Edit your message with the same 3 steps process as above (`rebase -i, commit --amend, rebase --continue`). Then force push the commit:
+
+```bash
+      git push origin master --force
+```
+
+⚠️ But! Remember re-pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
+
+<h2 id="branch">BRANCH</h2>
+
+<h3 id='createbranch'>Create a Branch</h3>
+
+[Go Back to Summary](#summary)
+
+```bash
+   git branch <branch name>
+```
+
+<h3 id='listbranches'>List All Branches local/remote</h3>
+
+[Go Back to Summary](#summary)
+
+```bash
+   git branch -a
+```
+
+<h3 id='switchtobranch'>Switch to Branch</h3>
+
+[Go Back to Summary](#summary)
+
+```bash
+   git checkout <branch name>
+```
+
+<h3 id='createswitchbranch'>Create and Switch to Branch (in One Command)</h3>
+
+[Go Back to Summary](#summary)
+
+```bash
+   git checkout -b <branch name>
+```
+
+<h3 id='pushbranch'>Push a Branch</h3>
+
+[Go Back to Summary](#summary)
+
+-   After You've Made the Changes on the Branch
+-   Add and commit
+
+```bash
+      git add -A
+      git commit -m "message"
+```
+
+-   After Commit, Push Branch to Remote (Origin/Branch)
+
+```bash
+      git push origin <branch name>
+```
+
+<h3 id='mergebranch'>Merge a Branch to Master</h3>
+
+[Go Back to Summary](#summary)
+
+-   Merge a Branch to Local HEAD (Master) and Push to Master to Remote (Origin)
+
+```bash
+      git checkout master       # to change to master branch
+      git pull origin master    # just to be sure that local master is up to date
+      git branch --merged       # to check if the branch was merged, right now is just "master"
+      git merge <branch name>   # to merge the changes to local master
+      git branch --merged       # to check if the branch was merged
+      git push origin master    # to push this changes to remote master
+```
+
+<h3 id='deletebranch'>Delete a Branch</h3>
+
+[Go Back to Summary](#summary)
+
+```bash
+      git branch -d <branch name>              # to delete local branch
+      git push origin --delete <branch name>   # to delete remote branch
+```
+
+<h2 id='discard'>DISCARD CHANGES</h2>
+
+[Go Back to Summary](#summary)
+
+<h3 id="discard-not-committed-changes">Discard Changes - <strong>Not Staged</strong></h3>
+
+[Go Back To Summary](#summary)
+
+-   To revert the file back to the state it was in before the changes. This will put your local git (HEAD) on your last commit and will erase all your modifications.
+
+```bash
+      git checkout -- <filename>
+```
+
+<h2 id="unstage">UNSTAGE</h2>
+
+-   Remove from stage (after `git add -A` , `git add <file>` or `git add .`) - **NOT COMMITTED FILES**
+
+<h3 id="git-reset-head-file">Remove All From Stage - <strong>KEEP</strong> the Modifications</h3>
+
+[Go Back To Summary](#summary)
+
+-   To remove files from stage use `reset HEAD`. This will unstage the file(s) and **KEEP** all the modifications.
+
+```bash
+      git reset
+
+      #or
+
+      git reset HEAD          # unstage all files
+```
+
+<h3 id="git-reset-file">Remove a Specific File From Stage - <strong>KEEP</strong> the Modifications</h3>
+
+[Go Back To Summary](#summary)
+
+-   Remove from stage (after `git add -A` or `git add <filename>`). This will unstage the file and **KEEP** all the modifications.
+
+```bash
+      git reset <filename>    # unstage a specific file
+```
+
+<h2 id='reset'>RESET</h2>
+
+<h3 id="git-reset-head">Remove All From Stage - <strong>DICARD</strong> the Modifications</h3>
+
+[Go Back To Summary](#summary)
+
+-   To remove files from stage use `reset HEAD`. This will unstage the file(s) and **DISCARD** all the modifications.
+
+```bash
+      git --hard reset HEAD          # unstage all files
+```
+
+<h3 id="git-reset-hard-2">Reset HEAD to X Commits - <strong>DISCARD</strong> the Modifications</h3>
+
+[Go Back To Summary](#summary)
+
+-   This will **DISCARD** all the modifications and will set the HEAD to your previous commit(s).
+
+```bash
+      git reset --hard HEAD~1        # reset last commit
+```
+
+-   `~1` is the number of commit(s)
+
+<h2 id='delete'>DELETE</h2>
+
+<h3 id='delete-commit-not-pushed-keep-changes'>Delete a Commit Not Pushed - KEPP the Modifications</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   git reset HEAD^
+```
+
+-   `HEAD^` refers to the (first) parent commit of your current commit (in your local repo)
+
+<h3 id="delete-pushed-files">DELETE COMMITTED FILES</h3>
+
+[Go Back To Summary](#summary)
+
+-   1. Log all the pushed/committed files:
+
+```bash
       git log --oneline
-   ```
+```
 
-   ```bash
+```bash
       268186e (HEAD -> master, origin/master, origin/HEAD) remove
       3bdb527 Week 4, Day 1 - Exercise 2 - Express
       1002de7 Week 4, Day 1 - Exercise 1 - Node
@@ -488,11 +527,11 @@
       b92f8b6 Week 4, Day 1 - Exercise 3 - Lab Express
       1ad7b97 Week 4, Day 1 - Exercise 2 - Express
       05694f2 Week 4, Day 1 - Exercise 1 - Node
-   ```
+```
 
-* 2) Copy all the hashs that you want to delete from github
+-   2. Copy all the hashs that you want to delete from github
 
-   ```bash
+```bash
       268186e
       3bdb527
       1002de7
@@ -504,21 +543,21 @@
       b92f8b6
       1ad7b97
       05694f2
-   ```
+```
 
-* 3) Revert the HEAD as many times you need:
+-   3. Revert the local HEAD as many times you need:
 
-   ```bash
-      git reset HEAD~1        #this will revert the HEAD 1 commit 
+```bash
+      git reset HEAD~1        #this will revert the HEAD 1 commit
 
-      In this example, we are going to use 
+      In this example, we are going to use
 
-      git reset HEAD~11       #this will revert the HEAD 11 commits 
-   ```
+      git reset HEAD~11       #this will revert the HEAD 11 commits
+```
 
-* 4) Delete from GitHub
+-   4. Delete from GitHub
 
-   ```bash
+```bash
       git push origin +268186e^:master
       git push origin +3bdb527^:master
       git push origin +1002de7^:master
@@ -530,51 +569,26 @@
       git push origin +b92f8b6^:master
       git push origin +1ad7b97^:master
       git push origin +05694f2^:master
-   ```
+```
 
-* 5) Double check if everything went all right:
+-   5. Double check if everything went all right:
 
-   ```bash
+```bash
       git pull origin master
       git status
-   ```
+```
 
-<h1 id="change-file-path">Change File Path From Repo</h1>
+<h2 id='revert'>REVERT</h2>
 
-* ⚠️ Before you continue, read all the steps first to understand what will happen to your files/git history.
-* If you want to rename or change the file path from repo, first you have to change the file locally and then push the modifications to your repo.
+<h3 id="revert-full-commit">REVERT FULL COMMIT</h3>
 
-* 1) Use `git rm <./origin path/file> <./destination path/file>`
+[Go Back To Summary](#summary)
 
-   ```bash
-      # Example:
-      
-      git mv SCHEDULE.md work/      # Moving SCHEDULE.md from root to folder 'work'
-   ```
+-   Sometimes you may want to undo a whole commit with all changes. Instead of going through all the changes manually, you can simply tell git to revert a commit, which does not even have to be the last one. Reverting a commit means to create a new commit that undoes all changes that were made in the bad commit. Just like above, the bad commit remains there, but it no longer affects the the current master and any future commits on top of it.
 
-  * You can rename the file during this process, you just need to change the file name.
-  
-* 2) `git status`, you will see that git renamed the file and added to stage
-  
-   ```bash
-      Changes to be committed:
-         (use "git reset HEAD <file>..." to unstage)
-
-	   renamed:    SCHEDULE.md -> work/SCHEDULE.md
-   ```
-
-* 3) Add a commit message `git commit -m "your message"`
-* 4) `git push origin master`
-
-* If you check your git history on github, you won't see the previous commits, you will only see your last commit.
-  * ⚠️ So far I haven't found a command that can migrate the git history with the destination path/file. One way to view the past commits (before you moved your files) is to use `--follow`. On terminal:
-
-   ```bash
-      git log --follow --oneline <./path/file>
-   ```
-   * This command accepts only one file
-   * I doesn't matter if you renamed the file 
-
+```bash
+      git revert {hash key}
+```
 
 <h1 id="github-gist">GitHub GIST</h1>
 
@@ -582,6 +596,60 @@
 
 `https://gist.github.com/Roger-Takeshita`
 
-* **Gist description**: A brief description about your gist
+-   **Gist description**: A brief description about your gist
 
-* **File**: Create any file just to GitHub let you create your gist
+-   **File**: Create any file just to GitHub let you create your gist
+
+<h1 id='heroku'>Heroku</h1>
+
+<h2 id='logincreate'>LOGIN/CREATE</h2>
+
+<h3 id='herokulogin'>Login</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   heroku login
+```
+
+<h3 id='herokucreate'>Create App</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   heroku create <app_name>
+```
+
+<h3 id='associateapp'>Associate Existing Heroku App</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   heroku git:remote -a <app_name>
+```
+
+<h2 id='deploy'>DEPLOY</h2>
+
+<h3 id='deploytogit'>Deploy to GitHub - Repo</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   git push heroku master
+```
+
+<h3 id='deploytogitsubtree'>Deploy to GitHub - Subtree</h3>
+
+[Go Back to Summary](#summary)
+
+```Bash
+   git subtree push --prefix path/to/subdirectory heroku master
+```
+
+-   where `path/to/subdirectory` is the path to the project that you want to deploy to heroku
+-   for example we have this [repo](https://github.com/Roger-Takeshita/GraphQL)
+    -   Inside we have a folder called `2_GraphQL_Prisma` (we want to deploy this folder)
+
+```Bash
+      git subtree push --prefix 2_GraphQL_Prisma heroku master
+```
