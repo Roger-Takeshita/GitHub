@@ -20,6 +20,10 @@
         -   [Download All Modifications from Upstream](#gitpullup)
         -   [Block repo from pushing to origin](#gitnopush)
 
+    -   [MERGE CONFLICT](#mergeconflict)
+
+        -   [Undo a Merge | git merge --abort](#gitmergeabort)
+
     -   [LOGS](#logs)
 
         -   [Log Commits (One Line) | git log --oneline](#git-log)
@@ -200,6 +204,19 @@
 
     ```Bash
       git remote set-url --push origin no_push
+    ```
+
+<h2 id='mergeconflict'>MERGE CONFLICT</h2>
+
+<h3 id='gitmergeabort'>Undo a Merge</h3>
+
+[Go Back to Summary](#summary)
+
+-   Sometimes we pull the modifications from origin/upstream but we change our mind, and we don't want to merge the modifications on our master branch. But we already pulled.
+-   This will return to the state before we started the merge at any time.
+
+    ```Bash
+      git merge --abort
     ```
 
 <h2 id='logs'>LOGS</h2>
