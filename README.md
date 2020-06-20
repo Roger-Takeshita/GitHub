@@ -23,6 +23,8 @@
     -   [MERGE CONFLICT](#mergeconflict)
 
         -   [Undo a Merge | git merge --abort](#gitmergeabort)
+        -   [Check for Leftover Conflicts | git diff --check | grep -i conflict](#gitdiff1)
+        -   [Check for Leftover Conflicts - Only File Names | git ls-files -u | cut -f 2 | sort -u](#gitdiff2)
 
     -   [LOGS](#logs)
 
@@ -217,6 +219,36 @@
 
     ```Bash
       git merge --abort
+    ```
+
+<h3 id='gitdiff1'>Check for Leftover Conflicts</h3>
+
+[Go Back to Summary](#summary)
+
+-   List all the file names that have conflicts + the line and highlight as a **conflict**
+
+    ```Bash
+      git diff --check | grep -i conflict
+    ```
+
+    ```Bash
+      d2bs/kolbot/tools/ToolsThread.js:786: leftover conflict marker
+      d2bs/kolbot/tools/ToolsThread.js:788: leftover conflict marker
+      d2bs/kolbot/tools/ToolsThread.js:791: leftover conflict marker
+    ```
+
+<h3 id='gitdiff2'>Check for Leftover Conflicts - Only File Names</h3>
+
+[Go Back to Summary](#summary)
+
+-   List all the file names that have conflicts
+
+    ```Bash
+      git ls-files -u | cut -f 2 | sort -u
+    ```
+
+    ```Bash
+      d2bs/kolbot/tools/ToolsThread.js
     ```
 
 <h2 id='logs'>LOGS</h2>
