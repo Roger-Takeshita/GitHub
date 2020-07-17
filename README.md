@@ -13,6 +13,10 @@
         -   [Set New Remote Upstream | git remote add upstream](#git-upstream)
         -   [Check Remote/Upstream URL | git remote -v](#git-check-remote)
 
+    -   [SUBMODULE](#submodule)
+
+        -   [Set Different Repos Into a Single Repo | git submodule add](#gitsubmodule)
+
     -   [FETCH/PULL](#fetchpull)
 
         -   [Check All Modifications from Remote (Origin) | git fetch](#fetch-modifications)
@@ -164,6 +168,17 @@
 ```bash
   git remote -v
 ```
+
+<h2 id='gitsubmodule'>Set Different Repos Into a Single Repo</h2>
+
+[Go Back to Summary](#summary)
+
+-   It often happens that while working on one project, you need to use another project from within it. Perhaps it’s a library that a third party developed or that you’re developing separately and using in multiple parent projects. A common issue arises in these scenarios: you want to be able to treat the two projects as separate yet still be able to use one from within the other.
+-   More information how to clone a project with submodules [Official Docs](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+
+    ```Bash
+      git submodule add <repo_url>
+    ```
 
 <h2 id='fetchpull'>FETCH/PULL MODIFICATIONS</h2>
 
