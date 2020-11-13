@@ -1,10 +1,15 @@
-<h1 id="summary">Summary</h1>
+<h1 id="contents">Table of Contents</h1>
 
 - [VSCODE SHORTCUTS](#vscode-shortcuts)
   - [Preview Markdown Mac](#preview-markdown-mac)
   - [Preview Markdown Windows](#preview-markdown-windows)
 - [SET VSCODE AS DEFAULT EDITOR](#set-vscode-as-default-editor)
   - [Default Editor - MAC](#default-editor---mac)
+- [WORKFLOW](#workflow)
+    - [Branches](#branches)
+  - [Issue Label](#issue-label)
+  - [New Ticket](#new-ticket)
+  - [Add New Feature](#add-new-feature)
 - [COMMANDS](#commands)
   - [REMOTE](#remote)
     - [Set New Remote Origin](#set-new-remote-origin)
@@ -76,13 +81,13 @@
 
 ## Preview Markdown Mac
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - `CMD+Shift+V`: open README Preview in VSCode
 
 ## Preview Markdown Windows
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - `Ctrl+Alt+V`: open README Preview in VSCode
 
@@ -90,7 +95,7 @@
 
 ## Default Editor - MAC
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - If you manually install Visual Studio Code, rather than using Homebrew, you will need to add the code executable to your PATH.
 
@@ -108,21 +113,209 @@
   1. Press: `CMD + SHIFT + P`
   2. Insert: install code and select from autocomplete menu shell command: `Install 'code'` in command PATH
 
+# WORKFLOW
+
+[Go Back to Contents](#contents)
+
+- GitHub Workflow
+
+  ![](https://i0.wp.com/lanziani.com/slides/gitflow/images/gitflow_1.png)
+
+  - The idea is to have the following branches
+
+    - `production`, real production workload (live code)
+      - `hotfixes`, branches that are quick fixes on production
+    - `stating (release branches)`, blue / green server, duplicate of the `production` environment (testing)
+      - If all tests pass, we will swap it with production
+    - `main (development)`, where we are going to merge all features
+      - `features`
+      - `qa`, perform tests before merging into `staging`
+
+### Branches
+
+[Go Back to Contents](#contents)
+
+- On `Terminal`, create remote branches
+
+  ```Bash
+    git checkout -b production
+    git push
+    git push --set-upstream origin production
+
+    git checkout -b hotfixes
+    git push
+    git push --set-upstream origin hotfixes
+
+    git checkout -b staging
+    git push
+    git push --set-upstream origin staging
+
+    git checkout -b main
+    git push
+    git push --set-upstream origin main
+  ```
+
+## Issue Label
+
+[Go Back to Contents](#contents)
+
+- On your repo
+
+  - Click on **Issues** tab
+
+    ![](https://i.imgur.com/f6iTaqY.png)
+
+  - Click on **New issue**
+
+    ![](https://i.imgur.com/eFjbeWh.png)
+
+    - On the sidebar, click on **Labels > Edit labels**
+
+      ![](https://i.imgur.com/vCgqJ4H.png)
+
+      - Add the following labels
+
+        - `feature`
+        - `hotfix`
+        - `maintenance`
+
+        ![](https://i.imgur.com/m2jJi9Z.png)
+
+## New Ticket
+
+[Go Back to Contents](#contents)
+
+- On `repo > Issues Tab > New issue`
+
+  - Create a new issue:
+
+    - Title: `Update README file`
+    - Description: `I need to add GitHub workflow.`
+    - Sidebar:
+
+      - Assignees: `Roger-Takeshita` (in this case we are assigning to ourselves)
+      - Labels: `feature`
+
+    - Click on **Submit new issue**
+
+      ![](https://i.imgur.com/uEHcOBI.png)
+
+- After creating a new issue, it will generate a issue number (**ticket number**, in this case `#1`)
+
+  - We create the issue first so we can get the ticket number and correlate the ticket to the branch that we are currently working on
+  - In this case we don't have anything yet, but we will create a new branch (`feature/ticket-number-branch-name`)
+
+    ![](https://i.imgur.com/MNO35u4.png)
+
+## Add New Feature
+
+[Go Back to Contents](#contents)
+
+1. New Ticket
+
+   - On `GitHub > Issues`
+     - Click on **New Issue**
+       - Title: `Update README file`
+       - Description: `I need to add GitHub workflow.`
+       - Sidebar:
+         - Assignees: `Roger-Takeshita`
+         - Labels: `feature`
+       - Click on **Submit new issue**
+
+2. Feature Branch
+
+   - Create new **feature** branch (`feature/ticket-number-branch-name`)
+   - On `Terminal`:
+
+     ```Bash
+       # From the main branch
+       git checkout main
+       # Create a new feature branch
+       git checkout -b feature/1-update-readme-github-workflow
+       # update README
+       git add README.md
+       git commit -m "#1 - should add github workflow"
+       # Your commit message should follow
+       # #1 -> Ticket number (don't forget the #)
+       # -   -> optional
+       # msg
+       git push
+       git push --set-upstream origin feature/1-update-readme-github-workflow
+     ```
+
+3. Main Branch
+
+   - Create a new **Pull Request** (`main` <- `feature`)
+   - On `GitHub > Pull requests`
+
+     - Click on **New pull request**
+       - Compare Changes
+         - base: `main` <- compare: `feature/1-update-readme-github-workflow`
+         - Click on **Create pull request**
+           - Description: `I've updated README file with github workflow`
+           - Click on **Create pull request**
+
+4. Staging Branch
+
+   - After someone merge your PR into the **main** branch, we need to send to **staging** branch
+
+   - On `Terminal`
+
+     ```Bash
+       # Update the main branch with the merged modifications
+       git checkout main
+       git pull
+
+       # Change to staging branch
+       git checkout staging
+       git merge main
+       git tag "v1.0.0"
+       #         ^ ^ ^
+       #         | | └── Hotfixes
+       #         | └── Feature/Minor updates
+       #         └── Major updates
+       git push --tags
+     ```
+
+   - Create a new **Pull Request** (`staging` <- `main`)
+   - On `GitHub > Pull requests`
+
+     - Click on **New pull request**
+       - Compare Changes
+         - base: `staging` <- compare: `main`
+         - Click on **Create pull request**
+           - Title: `Latest README update - Add GitHub Workflow`
+           - Description: `Added GitHub workflow`
+           - Click on **Create pull request**
+
+5. Production Branch
+
+   - Create a new **Pull Request** (`production` <- `staging`)
+   - On `GitHub > Pull requests`
+
+     - Click on **New pull request**
+       - Compare Changes
+         - base: `production` <- compare: `staging`
+         - Click on **Create pull request**
+           - Title: `Staging to Production - Add GitHub Workflow`
+           - Description: `Adding GitHub Workflow into production`
+           - Click on **Create pull request**
+
 # COMMANDS
 
 ## REMOTE
 
 ### [Set New Remote Origin](https://help.github.com/en/articles/changing-a-remotes-url)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
-  git remote set-url origin <url>
+git remote set-url origin <url>
 ```
 
 ### Set New Remote Upstream
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git remote add upstream <url>
@@ -130,7 +323,7 @@
 
 ### Check Remote/Upstream URL
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git remote -v
@@ -138,7 +331,7 @@
 
 ### Set Different Repos Into a Single Repo
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - It often happens that while working on one project, you need to use another project from within it. Perhaps it’s a library that a third party developed or that you’re developing separately and using in multiple parent projects. A common issue arises in these scenarios: you want to be able to treat the two projects as separate yet still be able to use one from within the other.
 - More information how to clone a project with **submodules** [Official Docs](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
@@ -151,7 +344,7 @@
 
 ### Check All Modifications from Remote (Origin)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Fetch all the remote files that have been changed (just the paths)
 - It doesn't download the modifications
@@ -162,7 +355,7 @@
 
 ### Download All Modifications from Remote (Origin/Branch)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Pull all the modified files
 
@@ -172,7 +365,7 @@
 
 ### Download All Modifications from Upstream
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Download all modifications from upstream (a forked repo) to your local machine (master)
 
@@ -182,7 +375,7 @@
 
 ### Disable Push to Origin
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Disable git from pushing to origin, we can use all features for version control like git pull up upstream
 
@@ -194,7 +387,7 @@
 
 ### Undo a Merge
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Sometimes we pull the modifications from origin/upstream but we change our mind, and we don't want to merge the modifications on our master branch. But we already pulled.
 - This will return to the state before we started the merge at any time.
@@ -205,7 +398,7 @@
 
 ### Check for Leftover Conflicts
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - List all the file names that have conflicts + the line and highlight as a **conflict**
 
@@ -221,7 +414,7 @@
 
 ### Check for Leftover Conflicts - Only File Names
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - List all the file names that have conflicts
 
@@ -237,7 +430,7 @@
 
 ### Log Commits (One Line)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - List all commits in one line, useful to get `hash keys`
 
@@ -247,7 +440,7 @@
 
 ### Log Commits Message Only
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git log -n --pretty=format:%s $hash
@@ -271,7 +464,7 @@
 
 ### Stash Uncommitted Files/Changes
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - To stash all the changes without the need to commit/push
 
@@ -281,7 +474,7 @@
 
 ### Apply Stashed Files/Changes
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - To apply back the changes
 
@@ -291,7 +484,7 @@
 
 ### Show Stashed Files/Changes
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Show all the files that you have stashed
 
@@ -301,7 +494,7 @@
 
 ### Delete Stashed Files/Changes
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Discard all the stashed files/changes
 
@@ -311,7 +504,7 @@
 
 ## TRACK/UNTRACK FILES
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - There are often times when you want to modify a file but not commit the changes, for example changing the database configuration to run on your local machine.
 
@@ -319,7 +512,7 @@
 
 ### Untrack Pushed File (Similar to .gitignore)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git update-index --assume-unchanged <filename>
@@ -327,7 +520,7 @@
 
 ### Track Back Ignored Files
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git update-index --no-assume-unchanged <filename>
@@ -335,13 +528,13 @@
 
 ### List Untracked Files
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - If you forgot what file did you `--assume-unchanged`, you can call the list using the following command:
 
 #### Windows Command
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git ls-files -v | findstr /B h
@@ -349,7 +542,7 @@
 
 #### Mac/Unix Command
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git ls-files -v | grep '^h'
@@ -357,13 +550,13 @@
 
 ## CHANGE COMMIT MESSAGE
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or burried below 10 other commits
 
 ### Change Commit Message - Not Pushed
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - This will open your \$EDITOR and let you change the message. Continue with your usual git push origin master.
 
@@ -373,7 +566,7 @@
 
 ### Change Commit Message - Already Pushed
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - We edit the message like just above. But need to `--force` the push to update the remote history.
 - ⚠️ But! Force pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
@@ -385,7 +578,7 @@
 
 ### Change Commit Message - Not Pushed + Old Commit
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Rebase opened your history and let you pick what to change. With edit you tell you want to change the message. Git moves you to a new branch to let you `--amend` the message. git rebase `--continue` puts you back in your previous branch with the message changed.
 
@@ -398,7 +591,7 @@
 
 ### Change Commit Message - Already Pushed + Old Commit
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Edit your message with the same 3 steps process as above (`rebase -i, commit --amend, rebase --continue`). Then force push the commit:
 
@@ -412,7 +605,7 @@
 
 ### Create a Branch
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git branch <branch name>
@@ -420,7 +613,7 @@
 
 ### List All Branches local/remote
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git branch -a
@@ -428,7 +621,7 @@
 
 ### Switch to Branch
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git checkout <branch name>
@@ -436,7 +629,7 @@
 
 ### Create and Switch to Branch (in One Command)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git checkout -b <branch name>
@@ -444,7 +637,7 @@
 
 ### Push a Branch
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - After You've Made the Changes on the Branch
 - Add and commit
@@ -462,7 +655,7 @@
 
 ### Merge a Branch to Master
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Merge a Branch to Local HEAD (Master) and Push to Master to Remote (Origin)
 
@@ -477,7 +670,7 @@
 
 ### Delete a Branch
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```bash
   git branch -d <branch name>              # to delete local branch
@@ -488,7 +681,7 @@
 
 ### Discard Changes - Not Staged
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - To revert the file back to the state it was in before the changes. This will put your local git (HEAD) on your last commit and will erase all your modifications.
 
@@ -498,13 +691,13 @@
 
 ## UNSTAGE
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Remove from stage (after `git add -A` , `git add <file>` or `git add .`) - **NOT COMMITTED FILES**
 
 ### Remove All From Stage - KEEP the Modifications
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - To remove files from stage use `reset HEAD`. This will unstage the file(s) and **KEEP** all the modifications.
 
@@ -518,7 +711,7 @@
 
 ### Remove a Specific File From Stage - KEEP the Modifications
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Remove from stage (after `git add -A` or `git add <filename>`). This will unstage the file and **KEEP** all the modifications.
 
@@ -530,7 +723,7 @@
 
 ### Reset HEAD Last Commit - KEEP Modifications NOT Staged
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - This command will delete your last commit (not pushed) and all modification will be **not** staged, so you have to manually `git add` them back to stage.
 
@@ -543,7 +736,7 @@
 
 ### Reset HEAD Last Commit - KEEP Modifications Staged
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - This command will delete your last commit (not pushed) and all modification will be in stage
 
@@ -556,7 +749,7 @@
 
 ### Reset HEAD Stage - DISCARD the Modifications
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - To remove files from stage use `--hard reset HEAD`. This will unstage the file(s) and **DISCARD** all the modifications.
 
@@ -566,7 +759,7 @@
 
 ### Reset HEAD to X Commits - DISCARD the Modifications
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - This will **DISCARD** all the modifications and will set the HEAD to your previous commit(s).
 
@@ -581,7 +774,7 @@
 
 ### Delete Pushed Files From Remote/Origin
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - 1. Log all the pushed/committed files:
 
@@ -654,7 +847,7 @@
 
 ### [Removing Sensitive Data From a Repository](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/removing-sensitive-data-from-a-repository)
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Using `filter-branch`
 
@@ -740,7 +933,7 @@
 
 ### Revert Full Commit
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 - Sometimes you may want to undo a whole commit with all changes. Instead of going through all the changes manually, you can simply tell git to revert a commit, which does not even have to be the last one. Reverting a commit means to create a new commit that undoes all changes that were made in the bad commit. Just like above, the bad commit remains there, but it no longer affects the the current master and any future commits on top of it.
 
@@ -750,7 +943,7 @@
 
 # GitHub GIST
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 `https://gist.github.com/Roger-Takeshita`
 
@@ -764,7 +957,7 @@
 
 ### Login
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```Bash
   heroku login
@@ -772,7 +965,7 @@
 
 ### Create App
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```Bash
   heroku create <app_name>
@@ -780,7 +973,7 @@
 
 ### Associate Existing Heroku App
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```Bash
   heroku git:remote -a <app_name>
@@ -790,7 +983,7 @@
 
 ### Deploy to GitHub - Repo
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```Bash
   git push heroku master
@@ -798,7 +991,7 @@
 
 ### Deploy to GitHub - Subtree
 
-[Go Back to Summary](#summary)
+[Go Back to Summary](#contents)
 
 ```Bash
   git subtree push --prefix path/to/subdirectory heroku master
