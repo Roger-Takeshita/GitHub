@@ -10,6 +10,7 @@
   - [Issue Label](#issue-label)
   - [New Ticket](#new-ticket)
   - [Add New Feature](#add-new-feature)
+  - [Hotfix](#hotfix)
 - [COMMANDS](#commands)
   - [REMOTE](#remote)
     - [Set New Remote Origin](#set-new-remote-origin)
@@ -299,6 +300,61 @@
          - Click on **Create pull request**
            - Title: `Staging to Production - Add GitHub Workflow`
            - Description: `Adding GitHub Workflow into production`
+           - Click on **Create pull request**
+
+## Hotfix
+
+[Go Back to Contents](#contents)
+
+1. New Ticket
+
+   - On `GitHub > Issues`
+     - Click on **New Issue**
+       - Title: `Update README file immediately add hotfix`
+       - Description: `I forgot to add hotfix doc`
+       - Sidebar:
+         - Assignees: `Roger-Takeshita`
+         - Labels: `hotfix`
+       - Click on **Submit new issue**
+
+2. Hotfix Branch
+
+   - Create new **bug** branch (`hotfixes`)
+   - On `Terminal`:
+
+     ```Bash
+       git checkout main
+       git pull
+       # From the production branch
+       git checkout hotfixes
+       git merge production
+       # update README
+       git add README.md
+       git commit -m "#5 - should add hotfix doc"
+       # Your commit message should follow
+       # #5 -> Ticket number (don't forget the #)
+       # -   -> optional
+       # msg
+       git push
+       git tag "v1.0.1"
+       #         ^ ^ ^
+       #         | | └── Hotfixes
+       #         | └── Feature/Minor updates
+       #         └── Major updates
+       git push --tags
+     ```
+
+3. Production Branch
+
+   - Create a new **Pull Request** (`production` <- `hotfixes`)
+   - On `GitHub > Pull requests`
+
+     - Click on **New pull request**
+       - Compare Changes
+         - base: `production` <- compare: `hotfixes`
+         - Click on **Create pull request**
+           - Title: `Updated readme with hotfix doc`
+           - Description: `Updated readme with hotfix documentation`
            - Click on **Create pull request**
 
 # COMMANDS
