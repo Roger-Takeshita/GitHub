@@ -6,7 +6,7 @@
 - [SET VSCODE AS DEFAULT EDITOR](#set-vscode-as-default-editor)
   - [Default Editor - MAC](#default-editor---mac)
 - [WORKFLOW](#workflow)
-    - [Branches](#branches)
+  - [Branches](#branches)
   - [Issue Label](#issue-label)
   - [New Ticket](#new-ticket)
   - [Add New Feature](#add-new-feature)
@@ -132,7 +132,7 @@
       - `features`
       - `qa`, perform tests before merging into `staging`
 
-### Branches
+## Branches
 
 [Go Back to Contents](#contents)
 
@@ -525,8 +525,23 @@ git remote set-url origin <url>
 - To stash all the changes without the need to commit/push
 
   ```bash
-    git stash
+    git stash save "Your Message Here"
+
+    git stash save "first stashed files"
+    # Saved working directory and index state On master: first stashed files
+
+    git stash list
+    # stash@{0}: On master: first stashed files
+
+    git stash save "second stashed files"
+    # Saved working directory and index state On master: second stashed files
+
+    git stash list
+    # stash@{0}: On master: second stashed files
+    # stash@{1}: On master: first stashed files
   ```
+
+  - Add a message to easily find what is all about that stash
 
 ### Apply Stashed Files/Changes
 
@@ -534,28 +549,68 @@ git remote set-url origin <url>
 
 - To apply back the changes
 
+  - If we don't specify the stash number, git will apply the last stashed files (`stash{0}`)
+
   ```bash
     git stash apply
+  ```
+
+- To apply back a specific stash
+
+  ```Bash
+    # git stash apply stash@{stash_number_here}
+
+    git stash apply stash@{0}
+    # On branch master
+    # Your branch is up to date with 'origin/master'.
+
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git restore <file>..." to discard changes in working directory)
+    #         modified:   README.md
+
+    # no changes added to commit (use "git add" and/or "git commit -a")
   ```
 
 ### Show Stashed Files/Changes
 
 [Go Back to Summary](#contents)
 
-- Show all the files that you have stashed
+- Show all the files that you have stashed in your last stash
+
+  ```Bash
+    git stash show
+    # Config.md | 33 ++++++++++++++++++++++++-----
+    # 1 file changed, 33 insertions(+), 5 deletions(-)
+  ```
+
+- Show all the files that you have stashed of a specific stash
 
   ```bash
-    git stash show
+    # git stash show -p stash@{stash_number_here}
+
+    git stash show -p stash@{1}
+    # README.md | 24 +++++++++++++++++++++---
+    # 1 file changed, 21 insertions(+), 3 deletions(-)
   ```
 
 ### Delete Stashed Files/Changes
 
 [Go Back to Summary](#contents)
 
-- Discard all the stashed files/changes
+- Discard all the stashed files/changes in your last stash
 
   ```bash
     git stash drop
+  ```
+
+- Discard all the stashed files/changes of a specific stash
+
+  ```Bash
+    # git stash drop stash@{stash_number_here}
+
+    git stash drop stash@{1}
+    # Dropped stash@{1} (043540bb638a411a785ae34fb7a700ec08686611)
   ```
 
 ## TRACK/UNTRACK FILES
