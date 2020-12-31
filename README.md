@@ -17,11 +17,11 @@
     - [Set New Remote Upstream](#set-new-remote-upstream)
     - [Check Remote/Upstream URL](#check-remoteupstream-url)
     - [Set Different Repos Into a Single Repo](#set-different-repos-into-a-single-repo)
+    - [Prevent Pushing To Master](#prevent-pushing-to-master)
   - [FETCH/PULL MODIFICATIONS](#fetchpull-modifications)
     - [Check All Modifications from Remote (Origin)](#check-all-modifications-from-remote-origin)
     - [Download All Modifications from Remote (Origin/Branch)](#download-all-modifications-from-remote-originbranch)
     - [Download All Modifications from Upstream](#download-all-modifications-from-upstream)
-    - [Disable Push to Origin](#disable-push-to-origin)
   - [MERGE CONFLICT](#merge-conflict)
     - [Undo a Merge](#undo-a-merge)
     - [Check for Leftover Conflicts](#check-for-leftover-conflicts)
@@ -45,6 +45,7 @@
     - [Change Commit Message - Already Pushed](#change-commit-message---already-pushed)
     - [Change Commit Message - Not Pushed + Old Commit](#change-commit-message---not-pushed--old-commit)
     - [Change Commit Message - Already Pushed + Old Commit](#change-commit-message---already-pushed--old-commit)
+  - [CHANGE COMMIT DATE](#change-commit-date)
   - [BRANCH](#branch)
     - [Create a Branch](#create-a-branch)
     - [List All Branches local/remote](#list-all-branches-localremote)
@@ -396,6 +397,16 @@ git remote set-url origin <url>
     git submodule add <repo_url>
   ```
 
+### Prevent Pushing To Master
+
+[Go Back to Summary](#contents)
+
+- Disable git from pushing to origin
+
+  ```Bash
+    git remote set-url --push origin no_push
+  ```
+
 ## FETCH/PULL MODIFICATIONS
 
 ### Check All Modifications from Remote (Origin)
@@ -427,16 +438,6 @@ git remote set-url origin <url>
 
   ```Bash
     git pull upstream master
-  ```
-
-### Disable Push to Origin
-
-[Go Back to Summary](#contents)
-
-- Disable git from pushing to origin, we can use all features for version control like git pull up upstream
-
-  ```Bash
-    git remote set-url --push origin no_push
   ```
 
 ## MERGE CONFLICT
@@ -711,6 +712,16 @@ git remote set-url origin <url>
   ```
 
 ⚠️ But! Remember re-pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
+
+## CHANGE COMMIT DATE
+
+[Go Back to Contents](#contents)
+
+- Change the last commit date before pushing to remote
+
+  ```Bash
+    git commit --amend --no-edit --date="Fri Nov 6 20:00:00 2015 -0500"
+  ```
 
 ## BRANCH
 
