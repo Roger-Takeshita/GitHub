@@ -69,7 +69,14 @@
     - [Removing Sensitive Data From a Repository](#removing-sensitive-data-from-a-repository)
   - [REVERT](#revert)
     - [Revert Full Commit](#revert-full-commit)
-- [GitHub GIST](#github-gist)
+- [GITHUB GIST](#github-gist)
+- [MULTIPLE GITHUB ACCOUNT](#multiple-github-account)
+  - [Generate a New SSH Key](#generate-a-new-ssh-key)
+  - [Public SSH Key](#public-ssh-key)
+    - [Add SSH Key To GitHub](#add-ssh-key-to-github)
+  - [Add New SSH Private Key To List](#add-new-ssh-private-key-to-list)
+    - [Config](#config)
+    - [Add New Project Origin](#add-new-project-origin)
 - [HEROKU](#heroku)
   - [LOGIN/CREATE](#logincreate)
     - [Login](#login)
@@ -1063,7 +1070,7 @@ git remote set-url origin <url>
     git revert {hash key}
   ```
 
-# GitHub GIST
+# GITHUB GIST
 
 [Go Back to Summary](#contents)
 
@@ -1072,6 +1079,118 @@ git remote set-url origin <url>
 - **Gist description**: A brief description about your gist
 
 - **File**: Create any file just to GitHub let you create your gist
+
+# MULTIPLE GITHUB ACCOUNT
+
+## Generate a New SSH Key
+
+[Go Back to Contents](#contents)
+
+- Generate a new ssh key using your new email
+- On `Terminal`:
+
+  ```Bash
+    ssh-keygen -t rsa -C "your_new_email@gmail.com"
+    # Generating public/private rsa key pair.
+    # Enter file in which to save the key (/Users/roger-that/.ssh/id_rsa):
+    /Users/roger-that/.ssh/id_rsa_dev
+    # Enter passphrase (empty for no passphrase):
+    your_password
+    # Enter same passphrase again:
+    your_password
+    # Your identification has been saved in /Users/roger-that/.ssh/id_rsa_dev.
+    # Your public key has been saved in /Users/roger-that/.ssh/id_rsa_dev.pub.
+    # The key fingerprint is:
+    # SHA256:I60nfahisdhfiahsidfhiasdifhiashyH4 your_new_email@gmail.com
+    # The key's randomart image is:
+    # +---[RSA 3072]----+
+    # |                 |
+    # |                 |
+    # |                .|
+    # |       .       ..|
+    # |      k S    oo1.|
+    # |     o +..  .d%+=|
+    # |. . . =.c+  .-+*.|
+    # | p D =a*+.o  o...|
+    # |...  +Ffff +*f   |
+    # +----[SHA256]-----+
+  ```
+
+## Public SSH Key
+
+[Go Back to Contents](#contents)
+
+- Copy your new public SSH key
+
+  ```Bash
+    cat /Users/roger-that/.ssh/id_rsa_dev.pub
+
+    # ssh-rsa AAAAB3NzafskdlfajsdjflajsdlfjalsdfeqlZwxFV4kMKsc9t8lAyS3DKWfahsidfhahsdifhaids/IDY+kfhakjsdhfkahsdkfhakshdfkaksdfoausdofuaosdufoausdofuoausdofuaosdufoausodfoausdofuaosdufoausdofuasdaosudfoasidfouaosdufoausdofuasdou/fa9sdf89as7d9f7a9sdf9as7df97as9df7a0s9df7a09sdf78asd98bxchvbixcvbkhxckvbxkchvlbxjcvklbjxlcjvb;xjcvblkxjcvb;jx;cvbj;xclvjb;xcv;lxkcjvb/26/oKMPWEZdoR7wvLVmjORn10ZQsIvI3swnwyxB7pxkaj;lsdfjka;sldjf;aklsjdf;alksjdf;lajsd;lfja;sdjfk;lajsdfl;kajs;dfja;lsdjf;alksdjf;ajsYhyZkz1XjaCobqTN+asdfkljasldfjalsjdflajsldkfjlajsd;g1uo1/qUg/DM= your_new_email@gmail.com
+  ```
+
+### Add SSH Key To GitHub
+
+[Go Back to Contents](#contents)
+
+- Go to `Settings`
+
+  ![](https://i.imgur.com/2QR3ZvM.png)
+
+- Click on `SSH and GPG keys > New SSH key`
+
+  ![](https://i.imgur.com/hFkYsiY.png)
+
+- On `SSH keys / Add new` page
+
+  - Title: `Macbook`
+  - Key: `paste your public key`
+  - Click on **Add SSH key**
+
+    ![](https://i.imgur.com/Lvsk3B8.png)
+
+## Add New SSH Private Key To List
+
+[Go Back to Contents](#contents)
+
+- Add the the new ssh key to our known key list
+
+  ```Bash
+    ssh-add /Users/roger-that/.ssh/id_rsa_dev
+
+    # Enter passphrase for /Users/roger-that/.ssh/id_rsa_dev:
+    your_password
+
+    # Identity added: /Users/roger-that/.ssh/id_rsa_dev (your_new_email@gmail.com)
+  ```
+
+### Config
+
+[Go Back to Contents](#contents)
+
+- In `/Users/roger-that/.ssh/config` (create one if file doesn't exist)
+
+  ```Bash
+    Host unique_name
+      HostName github.com
+      User your_new_github_user
+      IdentityFile /Users/roger-that/.ssh/id_rsa_dev
+  ```
+
+### Add New Project Origin
+
+[Go Back to Contents](#contents)
+
+- We need to set our remote origin slightly different
+
+  ```Bash
+    # If you don't have set the origin
+    git remote add origin git@unique_name:/roger-takeshita-dev/codebase.git
+
+    # OR
+
+    # If you cloned from github
+    git remote set-url origin git@unique_name:/roger-takeshita-dev/codebase.git
+  ```
 
 # HEROKU
 
