@@ -33,6 +33,7 @@
     - [Stash Uncommitted Files/Changes](#stash-uncommitted-fileschanges)
     - [Apply Stashed Files/Changes](#apply-stashed-fileschanges)
     - [Show Stashed Files/Changes](#show-stashed-fileschanges)
+    - [Rename Stashed Message](#rename-stashed-message)
     - [Delete Stashed Files/Changes](#delete-stashed-fileschanges)
   - [TRACK/UNTRACK FILES](#trackuntrack-files)
     - [Untrack Pushed File (Similar to .gitignore)](#untrack-pushed-file-similar-to-gitignore)
@@ -600,6 +601,16 @@ git remote set-url origin <url>
     git stash show -p stash@{1}
     # README.md | 24 +++++++++++++++++++++---
     # 1 file changed, 21 insertions(+), 3 deletions(-)
+  ```
+
+### Rename Stashed Message
+
+[Go Back to Summary](#contents)
+
+- This command will create a new stash with all the stashed files
+
+  ```Bash
+    git stash store -m "your descriptive message here" stash@{1}
   ```
 
 ### Delete Stashed Files/Changes
