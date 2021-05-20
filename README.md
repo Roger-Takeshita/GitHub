@@ -55,6 +55,8 @@
     - [Push a Branch](#push-a-branch)
     - [Merge a Branch to Master](#merge-a-branch-to-master)
     - [Delete a Branch](#delete-a-branch)
+    - [Rename Local Branch](#rename-local-branch)
+    - [Rename Remote Branch](#rename-remote-branch)
   - [DISCARD CHANGES](#discard-changes)
     - [Discard Changes - Not Staged](#discard-changes---not-staged)
   - [UNSTAGE](#unstage)
@@ -816,6 +818,41 @@ git remote set-url origin <url>
   git branch -d <branch name>              # to delete local branch
   git push origin --delete <branch name>   # to delete remote branch
 ```
+
+### Rename Local Branch
+
+[Go Back to Summary](#contents)
+
+1. Switch to the local branch which you want to rename:
+
+   ```Bash
+     git checkout <old_name>
+   ```
+
+2. Rename the local branch
+
+   ```Bash
+     git branch -m <new_name>
+   ```
+
+### Rename Remote Branch
+
+[Go Back to Summary](#contents)
+
+If you already pushed the branch to remote
+
+1. Rename your local branch
+2. Push the the `<new_name>` local branch and reset the upstream branch
+
+   ```Bash
+     git push origin -u <new_name>
+   ```
+
+3. Delete the `<old_name>` remote branch
+
+   ```Bash
+     git push origin --delete <old_name>
+   ```
 
 ## DISCARD CHANGES
 
