@@ -731,6 +731,45 @@ git remote set-url origin <url>
     git push origin master --force
   ```
 
+- Find a commit that you want to edit
+
+  ![](https://i.imgur.com/wkdprHm.png)
+
+  ```Bash
+    git rebase --interactive '3b2155d^'
+  ```
+
+  - Select the commit that you want to edit (`3b2155d`)
+
+    ![](https://i.imgur.com/Jxp7qZq.png)
+
+  - Update the message
+
+    ```Bash
+      git commit --amend -m "Should add new file + configuration"
+
+      # [detached HEAD 17f6a6d] Should add new file + configuration
+      # Date: Mon Jun 28 18:52:09 2021 -0400
+      # 1 file changed, 0 insertions(+), 0 deletions(-)
+      # create mode 100644 test.txt
+    ```
+
+  - After updating the message, continue rebase
+
+    ```Bash
+      git rebase --continue
+
+      # Successfully rebased and updated refs/heads/main.
+    ```
+
+  - Push force
+
+    ```Bash
+      git push -f
+    ```
+
+  ![](https://i.imgur.com/uiT4F76.png)
+
 ⚠️ But! Remember re-pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
 
 ## CHANGE COMMIT DATE
