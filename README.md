@@ -18,6 +18,10 @@
     - [Check Remote/Upstream URL](#check-remoteupstream-url)
     - [Set Different Repos Into a Single Repo](#set-different-repos-into-a-single-repo)
     - [Prevent Pushing To Master](#prevent-pushing-to-master)
+  - [UPSTREAM](#upstream)
+    - [Add Upstream](#add-upstream)
+    - [Fetch Latest From Upstream](#fetch-latest-from-upstream)
+    - [Merge/Rebase Upstream](#mergerebase-upstream)
   - [FETCH/PULL MODIFICATIONS](#fetchpull-modifications)
     - [Check All Modifications from Remote (Origin)](#check-all-modifications-from-remote-origin)
     - [Download All Modifications from Remote (Origin/Branch)](#download-all-modifications-from-remote-originbranch)
@@ -112,7 +116,7 @@
 - If you manually install Visual Studio Code, rather than using Homebrew, you will need to add the code executable to your PATH.
 
   ```bash
-    brew cask install visual-studio-code
+  brew cask install visual-studio-code
   ```
 
 - **In terminal**
@@ -150,21 +154,21 @@
 - On `Terminal`, create remote branches
 
   ```Bash
-    git checkout -b production
-    git push
-    git push --set-upstream origin production
+  git checkout -b production
+  git push
+  git push --set-upstream origin production
 
-    git checkout -b hotfixes
-    git push
-    git push --set-upstream origin hotfixes
+  git checkout -b hotfixes
+  git push
+  git push --set-upstream origin hotfixes
 
-    git checkout -b staging
-    git push
-    git push --set-upstream origin staging
+  git checkout -b staging
+  git push
+  git push --set-upstream origin staging
 
-    git checkout -b main
-    git push
-    git push --set-upstream origin main
+  git checkout -b main
+  git push
+  git push --set-upstream origin main
   ```
 
 ## Issue Label
@@ -240,19 +244,19 @@
    - On `Terminal`:
 
      ```Bash
-       # From the main branch
-       git checkout main
-       # Create a new feature branch
-       git checkout -b feature/1-update-readme-github-workflow
-       # update README
-       git add README.md
-       git commit -m "#1 - should add github workflow"
-       # Your commit message should follow
-       # #1 -> Ticket number (don't forget the #)
-       # -   -> optional
-       # msg
-       git push
-       git push --set-upstream origin feature/1-update-readme-github-workflow
+      # From the main branch
+      git checkout main
+      # Create a new feature branch
+      git checkout -b feature/1-update-readme-github-workflow
+      # update README
+      git add README.md
+      git commit -m "#1 - should add github workflow"
+      # Your commit message should follow
+      # #1 -> Ticket number (don't forget the #)
+      # -   -> optional
+      # msg
+      git push
+      git push --set-upstream origin feature/1-update-readme-github-workflow
      ```
 
 3. Main Branch
@@ -274,19 +278,19 @@
    - On `Terminal`
 
      ```Bash
-       # Update the main branch with the merged modifications
-       git checkout main
-       git pull
+      # Update the main branch with the merged modifications
+      git checkout main
+      git pull
 
-       # Change to staging branch
-       git checkout staging
-       git merge main
-       git tag "v1.0.0"
-       #         ^ ^ ^
-       #         | | └── Hotfixes
-       #         | └── Feature/Minor updates
-       #         └── Major updates
-       git push --tags
+      # Change to staging branch
+      git checkout staging
+      git merge main
+      git tag "v1.0.0"
+      #         ^ ^ ^
+      #         | | └── Hotfixes
+      #         | └── Feature/Minor updates
+      #         └── Major updates
+      git push --tags
      ```
 
    - Create a new **Pull Request** (`staging` <- `main`)
@@ -334,25 +338,25 @@
    - On `Terminal`:
 
      ```Bash
-       git checkout main
-       git pull
-       # From the production branch
-       git checkout hotfixes
-       git merge production
-       # update README
-       git add README.md
-       git commit -m "#5 - should add hotfix doc"
-       # Your commit message should follow
-       # #5 -> Ticket number (don't forget the #)
-       # -   -> optional
-       # msg
-       git push
-       git tag "v1.0.1"
-       #         ^ ^ ^
-       #         | | └── Hotfixes
-       #         | └── Feature/Minor updates
-       #         └── Major updates
-       git push --tags
+      git checkout main
+      git pull
+      # From the production branch
+      git checkout hotfixes
+      git merge production
+      # update README
+      git add README.md
+      git commit -m "#5 - should add hotfix doc"
+      # Your commit message should follow
+      # #5 -> Ticket number (don't forget the #)
+      # -   -> optional
+      # msg
+      git push
+      git tag "v1.0.1"
+      #         ^ ^ ^
+      #         | | └── Hotfixes
+      #         | └── Feature/Minor updates
+      #         └── Major updates
+      git push --tags
      ```
 
 3. Production Branch
@@ -385,7 +389,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git remote add upstream <url>
+git remote add upstream <url>
 ```
 
 ### Check Remote/Upstream URL
@@ -393,7 +397,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git remote -v
+git remote -v
 ```
 
 ### Set Different Repos Into a Single Repo
@@ -404,7 +408,7 @@ git remote set-url origin <url>
 - More information how to clone a project with **submodules** [Official Docs](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
   ```Bash
-    git submodule add <repo_url>
+  git submodule add <repo_url>
   ```
 
 ### Prevent Pushing To Master
@@ -414,8 +418,38 @@ git remote set-url origin <url>
 - Disable git from pushing to origin
 
   ```Bash
-    git remote set-url --push origin no_push
+  git remote set-url --push origin no_push
   ```
+
+## UPSTREAM
+
+### Add Upstream
+
+[Go Back to Summary](#contents)
+
+```Bash
+git remote add upstream https://github.com/Roger-Takeshita/GitHub.git
+```
+
+### Fetch Latest From Upstream
+
+[Go Back to Summary](#contents)
+
+```Bash
+git fetch upstream
+```
+
+### Merge/Rebase Upstream
+
+[Go Back to Summary](#contents)
+
+```Bash
+git merge upstream/master master
+
+# or
+
+git rebase upstream/master
+```
 
 ## FETCH/PULL MODIFICATIONS
 
@@ -427,7 +461,7 @@ git remote set-url origin <url>
 - It doesn't download the modifications
 
   ```bash
-    git fetch
+  git fetch
   ```
 
 ### Download All Modifications from Remote (Origin/Branch)
@@ -437,7 +471,7 @@ git remote set-url origin <url>
 - Pull all the modified files
 
   ```bash
-    git pull origin master/branch
+  git pull origin master/branch
   ```
 
 ### Download All Modifications from Upstream
@@ -447,7 +481,7 @@ git remote set-url origin <url>
 - Download all modifications from upstream (a forked repo) to your local machine (master)
 
   ```Bash
-    git pull upstream master
+  git pull upstream master
   ```
 
 ## MERGE CONFLICT
@@ -460,7 +494,7 @@ git remote set-url origin <url>
 - This will return to the state before we started the merge at any time.
 
   ```Bash
-    git merge --abort
+  git merge --abort
   ```
 
 ### Check for Leftover Conflicts
@@ -470,13 +504,13 @@ git remote set-url origin <url>
 - List all the file names that have conflicts + the line and highlight as a **conflict**
 
   ```Bash
-    git diff --check | grep -i conflict
+  git diff --check | grep -i conflict
   ```
 
   ```Bash
-    d2bs/kolbot/tools/ToolsThread.js:786: leftover conflict marker
-    d2bs/kolbot/tools/ToolsThread.js:788: leftover conflict marker
-    d2bs/kolbot/tools/ToolsThread.js:791: leftover conflict marker
+  d2bs/kolbot/tools/ToolsThread.js:786: leftover conflict marker
+  d2bs/kolbot/tools/ToolsThread.js:788: leftover conflict marker
+  d2bs/kolbot/tools/ToolsThread.js:791: leftover conflict marker
   ```
 
 ### Check for Leftover Conflicts - Only File Names
@@ -486,11 +520,11 @@ git remote set-url origin <url>
 - List all the file names that have conflicts
 
   ```Bash
-    git ls-files -u | cut -f 2 | sort -u
+  git ls-files -u | cut -f 2 | sort -u
   ```
 
   ```Bash
-    d2bs/kolbot/tools/ToolsThread.js
+  d2bs/kolbot/tools/ToolsThread.js
   ```
 
 ## LOGS
@@ -502,7 +536,7 @@ git remote set-url origin <url>
 - List all commits in one line, useful to get `hash keys`
 
   ```bash
-    git log --oneline
+  git log --oneline
   ```
 
 ### Log Commits Message Only
@@ -510,19 +544,19 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git log -n --pretty=format:%s $hash
+git log -n --pretty=format:%s $hash
 ```
 
 - **Option 1)** If you want to view the last message, you can just add the `-n` = **number of past commit(s)**, whitout `$hash`. Example:
 
   ```bash
-    git log -1 --pretty=format:%s
+  git log -1 --pretty=format:%s
   ```
 
 - **Option 2)** IF you want to view a specific commit, you use `-n` = `1` and `$hash` = `hash key`
 
   ```bash
-    git log -n 1--pretty=format:%s a63ef55
+  git log -n 1--pretty=format:%s a63ef55
   ```
 
   - `a63ef55` is the hash key
@@ -536,20 +570,20 @@ git remote set-url origin <url>
 - To stash all the changes without the need to commit/push
 
   ```bash
-    git stash save "Your Message Here"
+  git stash save "Your Message Here"
 
-    git stash save "first stashed files"
-    # Saved working directory and index state On master: first stashed files
+  git stash save "first stashed files"
+  # Saved working directory and index state On master: first stashed files
 
-    git stash list
-    # stash@{0}: On master: first stashed files
+  git stash list
+  # stash@{0}: On master: first stashed files
 
-    git stash save "second stashed files"
-    # Saved working directory and index state On master: second stashed files
+  git stash save "second stashed files"
+  # Saved working directory and index state On master: second stashed files
 
-    git stash list
-    # stash@{0}: On master: second stashed files
-    # stash@{1}: On master: first stashed files
+  git stash list
+  # stash@{0}: On master: second stashed files
+  # stash@{1}: On master: first stashed files
   ```
 
   - Add a message to easily find what is all about that stash
@@ -563,24 +597,24 @@ git remote set-url origin <url>
   - If we don't specify the stash number, git will apply the last stashed files (`stash{0}`)
 
   ```bash
-    git stash apply
+  git stash apply
   ```
 
 - To apply back a specific stash
 
   ```Bash
-    # git stash apply stash@{stash_number_here}
+  # git stash apply stash@{stash_number_here}
 
-    git stash apply stash@{0}
-    # On branch master
-    # Your branch is up to date with 'origin/master'.
+  git stash apply stash@{0}
+  # On branch master
+  # Your branch is up to date with 'origin/master'.
 
-    # Changes not staged for commit:
-    #   (use "git add <file>..." to update what will be committed)
-    #   (use "git restore <file>..." to discard changes in working directory)
-    #         modified:   README.md
+  # Changes not staged for commit:
+  #   (use "git add <file>..." to update what will be committed)
+  #   (use "git restore <file>..." to discard changes in working directory)
+  #         modified:   README.md
 
-    # no changes added to commit (use "git add" and/or "git commit -a")
+  # no changes added to commit (use "git add" and/or "git commit -a")
   ```
 
 ### Show Stashed Files/Changes
@@ -590,19 +624,19 @@ git remote set-url origin <url>
 - Show all the files that you have stashed in your last stash
 
   ```Bash
-    git stash show
-    # Config.md | 33 ++++++++++++++++++++++++-----
-    # 1 file changed, 33 insertions(+), 5 deletions(-)
+  git stash show
+  # Config.md | 33 ++++++++++++++++++++++++-----
+  # 1 file changed, 33 insertions(+), 5 deletions(-)
   ```
 
 - Show all the files that you have stashed of a specific stash
 
   ```bash
-    # git stash show -p stash@{stash_number_here}
+  # git stash show -p stash@{stash_number_here}
 
-    git stash show -p stash@{1}
-    # README.md | 24 +++++++++++++++++++++---
-    # 1 file changed, 21 insertions(+), 3 deletions(-)
+  git stash show -p stash@{1}
+  # README.md | 24 +++++++++++++++++++++---
+  # 1 file changed, 21 insertions(+), 3 deletions(-)
   ```
 
 ### Rename Stashed Message
@@ -612,7 +646,7 @@ git remote set-url origin <url>
 - This command will create a new stash with all the stashed files
 
   ```Bash
-    git stash store -m "your descriptive message here" stash@{1}
+  git stash store -m "your descriptive message here" stash@{1}
   ```
 
 ### Delete Stashed Files/Changes
@@ -622,16 +656,16 @@ git remote set-url origin <url>
 - Discard all the stashed files/changes in your last stash
 
   ```bash
-    git stash drop
+  git stash drop
   ```
 
 - Discard all the stashed files/changes of a specific stash
 
   ```Bash
-    # git stash drop stash@{stash_number_here}
+  # git stash drop stash@{stash_number_here}
 
-    git stash drop stash@{1}
-    # Dropped stash@{1} (043540bb638a411a785ae34fb7a700ec08686611)
+  git stash drop stash@{1}
+  # Dropped stash@{1} (043540bb638a411a785ae34fb7a700ec08686611)
   ```
 
 ## TRACK/UNTRACK FILES
@@ -647,7 +681,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git update-index --assume-unchanged <filename>
+git update-index --assume-unchanged <filename>
 ```
 
 ### Track Back Ignored Files
@@ -655,7 +689,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git update-index --no-assume-unchanged <filename>
+git update-index --no-assume-unchanged <filename>
 ```
 
 ### List Untracked Files
@@ -669,7 +703,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git ls-files -v | findstr /B h
+git ls-files -v | findstr /B h
 ```
 
 #### Mac/Unix Command
@@ -677,14 +711,14 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git ls-files -v | grep '^h'
+git ls-files -v | grep '^h'
 ```
 
 ## CHANGE COMMIT MESSAGE
 
 [Go Back to Summary](#contents)
 
-- At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or burried below 10 other commits
+- At some point you’ll find yourself in a situation where you need edit a commit message. That commit might already be pushed or not, be the most recent or buried below 10 other commits
 
 ### Change Commit Message - Not Pushed
 
@@ -693,7 +727,7 @@ git remote set-url origin <url>
 - This will open your \$EDITOR and let you change the message. Continue with your usual git push origin master.
 
   ```bash
-    git commit --amend
+  git commit --amend
   ```
 
 ### Change Commit Message - Already Pushed
@@ -704,8 +738,8 @@ git remote set-url origin <url>
 - ⚠️ But! Force pushing your commit after changing it will very likely prevent others to sync with the repo, if they already pulled a copy. You should first check with them.
 
   ```bash
-    git commit --amend
-    git push origin master --force
+  git commit --amend
+  git push origin master --force
   ```
 
 ### Change Commit Message - Not Pushed + Old Commit
@@ -715,10 +749,10 @@ git remote set-url origin <url>
 - Rebase opened your history and let you pick what to change. With edit you tell you want to change the message. Git moves you to a new branch to let you `--amend` the message. git rebase `--continue` puts you back in your previous branch with the message changed.
 
   ```bash
-    git rebase -i HEAD~X       # X is the number of commits to go back
-                                # Move to the line of your commit, change pick into edit
-    git commit --amend         # Change your commit message
-    git rebase --continue      # Finish the rebase
+  git rebase -i HEAD~X       # X is the number of commits to go back
+                              # Move to the line of your commit, change pick into edit
+  git commit --amend         # Change your commit message
+  git rebase --continue      # Finish the rebase
   ```
 
 ### Change Commit Message - Already Pushed + Old Commit
@@ -728,7 +762,7 @@ git remote set-url origin <url>
 - Edit your message with the same 3 steps process as above (`rebase -i, commit --amend, rebase --continue`). Then force push the commit:
 
   ```bash
-    git push origin master --force
+  git push origin master --force
   ```
 
 - Find a commit that you want to edit
@@ -736,7 +770,7 @@ git remote set-url origin <url>
   ![](https://i.imgur.com/wkdprHm.png)
 
   ```Bash
-    git rebase --interactive '3b2155d^'
+  git rebase --interactive '3b2155d^'
   ```
 
   - Select the commit that you want to edit (`3b2155d`)
@@ -746,26 +780,26 @@ git remote set-url origin <url>
   - Update the message
 
     ```Bash
-      git commit --amend -m "Should add new file + configuration"
+    git commit --amend -m "Should add new file + configuration"
 
-      # [detached HEAD 17f6a6d] Should add new file + configuration
-      # Date: Mon Jun 28 18:52:09 2021 -0400
-      # 1 file changed, 0 insertions(+), 0 deletions(-)
-      # create mode 100644 test.txt
+    # [detached HEAD 17f6a6d] Should add new file + configuration
+    # Date: Mon Jun 28 18:52:09 2021 -0400
+    # 1 file changed, 0 insertions(+), 0 deletions(-)
+    # create mode 100644 test.txt
     ```
 
   - After updating the message, continue rebase
 
     ```Bash
-      git rebase --continue
+    git rebase --continue
 
-      # Successfully rebased and updated refs/heads/main.
+    # Successfully rebased and updated refs/heads/main.
     ```
 
   - Push force
 
     ```Bash
-      git push -f
+    git push -f
     ```
 
   ![](https://i.imgur.com/uiT4F76.png)
@@ -779,7 +813,7 @@ git remote set-url origin <url>
 - Change the last commit date before pushing to remote
 
   ```Bash
-    git commit --amend --no-edit --date="Fri Nov 6 20:00:00 2015 -0500"
+  git commit --amend --no-edit --date="Fri Nov 6 20:00:00 2015 -0500"
   ```
 
 ## BRANCH
@@ -789,7 +823,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git branch <branch name>
+git branch <branch name>
 ```
 
 ### List All Branches local/remote
@@ -797,7 +831,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git branch -a
+git branch -a
 ```
 
 ### Switch to Branch
@@ -805,7 +839,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git checkout <branch name>
+git checkout <branch name>
 ```
 
 ### Create and Switch to Branch (in One Command)
@@ -813,7 +847,7 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git checkout -b <branch name>
+git checkout -b <branch name>
 ```
 
 ### Push a Branch
@@ -824,14 +858,14 @@ git remote set-url origin <url>
 - Add and commit
 
   ```bash
-    git add -A
-    git commit -m "message"
+  git add -A
+  git commit -m "message"
   ```
 
 - After Commit, Push Branch to Remote (Origin/Branch)
 
   ```bash
-    git push origin <branch name>
+  git push origin <branch name>
   ```
 
 ### Merge a Branch to Master
@@ -841,12 +875,12 @@ git remote set-url origin <url>
 - Merge a Branch to Local HEAD (Master) and Push to Master to Remote (Origin)
 
   ```bash
-    git checkout master       # to change to master branch
-    git pull origin master    # just to be sure that local master is up to date
-    git branch --merged       # to check if the branch was merged, right now is just "master"
-    git merge <branch name>   # to merge the changes to local master
-    git branch --merged       # to check if the branch was merged
-    git push origin master    # to push this changes to remote master
+  git checkout master       # to change to master branch
+  git pull origin master    # just to be sure that local master is up to date
+  git branch --merged       # to check if the branch was merged, right now is just "master"
+  git merge <branch name>   # to merge the changes to local master
+  git branch --merged       # to check if the branch was merged
+  git push origin master    # to push this changes to remote master
   ```
 
 ### Delete a Branch
@@ -854,8 +888,8 @@ git remote set-url origin <url>
 [Go Back to Summary](#contents)
 
 ```bash
-  git branch -d <branch name>              # to delete local branch
-  git push origin --delete <branch name>   # to delete remote branch
+git branch -d <branch name>              # to delete local branch
+git push origin --delete <branch name>   # to delete remote branch
 ```
 
 ### Rename Local Branch
@@ -865,13 +899,13 @@ git remote set-url origin <url>
 1. Switch to the local branch which you want to rename:
 
    ```Bash
-     git checkout <old_name>
+   git checkout <old_name>
    ```
 
 2. Rename the local branch
 
    ```Bash
-     git branch -m <new_name>
+   git branch -m <new_name>
    ```
 
 ### Rename Remote Branch
@@ -884,13 +918,13 @@ If you already pushed the branch to remote
 2. Push the the `<new_name>` local branch and reset the upstream branch
 
    ```Bash
-     git push origin -u <new_name>
+   git push origin -u <new_name>
    ```
 
 3. Delete the `<old_name>` remote branch
 
    ```Bash
-     git push origin --delete <old_name>
+   git push origin --delete <old_name>
    ```
 
 ## DISCARD CHANGES
@@ -902,7 +936,7 @@ If you already pushed the branch to remote
 - To revert the file back to the state it was in before the changes. This will put your local git (HEAD) on your last commit and will erase all your modifications.
 
   ```bash
-    git checkout -- <filename>
+  git checkout -- <filename>
   ```
 
 ## UNSTAGE
@@ -918,11 +952,11 @@ If you already pushed the branch to remote
 - To remove files from stage use `reset HEAD`. This will unstage the file(s) and **KEEP** all the modifications.
 
   ```bash
-    git reset
+  git reset
 
-    #or
+  #or
 
-    git reset HEAD          # unstage all files
+  git reset HEAD          # unstage all files
   ```
 
 ### Remove a Specific File From Stage - KEEP the Modifications
@@ -932,7 +966,7 @@ If you already pushed the branch to remote
 - Remove from stage (after `git add -A` or `git add <filename>`). This will unstage the file and **KEEP** all the modifications.
 
   ```bash
-    git reset <filename>    # unstage a specific file
+  git reset <filename>    # unstage a specific file
   ```
 
 ## RESET
@@ -944,7 +978,7 @@ If you already pushed the branch to remote
 - This command will delete your last commit (not pushed) and all modification will be **not** staged, so you have to manually `git add` them back to stage.
 
   ```Bash
-      git reset HEAD~1
+  git reset HEAD~1
   ```
 
   - `~1` is the number of commit(s)
@@ -957,7 +991,7 @@ If you already pushed the branch to remote
 - This command will delete your last commit (not pushed) and all modification will be in stage
 
   ```Bash
-    git reset --soft HEAD~1
+  git reset --soft HEAD~1
   ```
 
   - `~1` is the number of commit(s)
@@ -970,7 +1004,7 @@ If you already pushed the branch to remote
 - To remove files from stage use `--hard reset HEAD`. This will unstage the file(s) and **DISCARD** all the modifications.
 
   ```bash
-    git --hard reset HEAD          # unstage all files
+  git --hard reset HEAD          # unstage all files
   ```
 
 ### Reset HEAD to X Commits - DISCARD the Modifications
@@ -980,7 +1014,7 @@ If you already pushed the branch to remote
 - This will **DISCARD** all the modifications and will set the HEAD to your previous commit(s).
 
   ```bash
-    git reset --hard HEAD~1        # reset last commit
+  git reset --hard HEAD~1        # reset last commit
   ```
 
   - `~1` is the number of commit(s)
@@ -995,70 +1029,70 @@ If you already pushed the branch to remote
 - 1. Log all the pushed/committed files:
 
   ```bash
-    git log --oneline
+  git log --oneline
   ```
 
   ```bash
-    268186e (HEAD -> master, origin/master, origin/HEAD) remove
-    3bdb527 Week 4, Day 1 - Exercise 2 - Express
-    1002de7 Week 4, Day 1 - Exercise 1 - Node
-    5ed3cc5 rename folders
-    bec7979 rename folders
-    a6f5fe2 Week 4, Day 1 - Exercise 3 - Lab Express
-    b707a70 Week 4, Day 1 - Exercise 2 - Express
-    e10d893 Week 4, Day 1 - Exercise 1 - Node
-    b92f8b6 Week 4, Day 1 - Exercise 3 - Lab Express
-    1ad7b97 Week 4, Day 1 - Exercise 2 - Express
-    05694f2 Week 4, Day 1 - Exercise 1 - Node
+  268186e (HEAD -> master, origin/master, origin/HEAD) remove
+  3bdb527 Week 4, Day 1 - Exercise 2 - Express
+  1002de7 Week 4, Day 1 - Exercise 1 - Node
+  5ed3cc5 rename folders
+  bec7979 rename folders
+  a6f5fe2 Week 4, Day 1 - Exercise 3 - Lab Express
+  b707a70 Week 4, Day 1 - Exercise 2 - Express
+  e10d893 Week 4, Day 1 - Exercise 1 - Node
+  b92f8b6 Week 4, Day 1 - Exercise 3 - Lab Express
+  1ad7b97 Week 4, Day 1 - Exercise 2 - Express
+  05694f2 Week 4, Day 1 - Exercise 1 - Node
   ```
 
 - 2. Copy all the hashes that you want to delete from github
 
   ```bash
-    268186e
-    3bdb527
-    1002de7
-    5ed3cc5
-    bec7979
-    a6f5fe2
-    b707a70
-    e10d893
-    b92f8b6
-    1ad7b97
-    05694f2
+  268186e
+  3bdb527
+  1002de7
+  5ed3cc5
+  bec7979
+  a6f5fe2
+  b707a70
+  e10d893
+  b92f8b6
+  1ad7b97
+  05694f2
   ```
 
 - 3. Revert the local HEAD as many times you need:
 
   ```bash
-    git reset HEAD~1        #this will revert the HEAD 1 commit and keep the modifications
+  git reset HEAD~1        #this will revert the HEAD 1 commit and keep the modifications
 
-    In this example, we are going to use
+  In this example, we are going to use
 
-    git reset HEAD~11       #this will revert the HEAD 11 commits
+  git reset HEAD~11       #this will revert the HEAD 11 commits
   ```
 
 - 4. Delete from GitHub
 
   ```bash
-    git push origin +268186e^:master
-    git push origin +3bdb527^:master
-    git push origin +1002de7^:master
-    git push origin +5ed3cc5^:master
-    git push origin +bec7979^:master
-    git push origin +a6f5fe2^:master
-    git push origin +b707a70^:master
-    git push origin +e10d893^:master
-    git push origin +b92f8b6^:master
-    git push origin +1ad7b97^:master
-    git push origin +05694f2^:master
+  git push origin +268186e^:master
+  git push origin +3bdb527^:master
+  git push origin +1002de7^:master
+  git push origin +5ed3cc5^:master
+  git push origin +bec7979^:master
+  git push origin +a6f5fe2^:master
+  git push origin +b707a70^:master
+  git push origin +e10d893^:master
+  git push origin +b92f8b6^:master
+  git push origin +1ad7b97^:master
+  git push origin +05694f2^:master
   ```
 
 - 5. Double check if everything went all right:
 
   ```bash
-    git pull origin master
-    git status
+  git pull origin master
+  git status
   ```
 
 ### [Removing Sensitive Data From a Repository](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/removing-sensitive-data-from-a-repository)
@@ -1076,73 +1110,73 @@ If you already pushed the branch to remote
    - Overwrite your existing tags
 
    ```Bash
-      git filter-branch --force --index-filter \
-      "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA" \
-      --prune-empty --tag-name-filter cat -- --all
+   git filter-branch --force --index-filter \
+   "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA" \
+   --prune-empty --tag-name-filter cat -- --all
    ```
 
    ```Bash
-      # Example
+   # Example
 
-      git filter-branch --force --index-filter \
-      "git rm --cached --ignore-unmatch 3-Taks-Manager/env/dev.env" \
-      --prune-empty --tag-name-filter cat -- --all
+   git filter-branch --force --index-filter \
+   "git rm --cached --ignore-unmatch 3-Taks-Manager/env/dev.env" \
+   --prune-empty --tag-name-filter cat -- --all
 
-      # Rewrite 48dc599c80e20527ed902928085e7861e6b3cbe6 (266/266)
-      # Ref 'refs/heads/master' was rewritten
+   # Rewrite 48dc599c80e20527ed902928085e7861e6b3cbe6 (266/266)
+   # Ref 'refs/heads/master' was rewritten
    ```
 
 2. Add your file with sensitive data to `.gitignore` to ensure that you don't accidentally commit it again.
 
    ```Bash
-      # Example
+   # Example
 
-      echo "YOUR-FILE-WITH-SENSITIVE-DATA" >> .gitignore
-      git add .gitignore
-      git commit -m "Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore"
+   echo "YOUR-FILE-WITH-SENSITIVE-DATA" >> .gitignore
+   git add .gitignore
+   git commit -m "Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore"
 
-      # [master 051452f] Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore
-      #  1 files changed, 1 insertions(+), 0 deletions(-)
+   # [master 051452f] Add YOUR-FILE-WITH-SENSITIVE-DATA to .gitignore
+   #  1 files changed, 1 insertions(+), 0 deletions(-)
    ```
 
 3. Once you're happy with the state of your repository, force-push your local changes to overwrite your GitHub repository, as well as all the branches you've pushed up:
 
    ```Bash
-      git push origin --force --all
+   git push origin --force --all
    ```
 
    ```Bash
-      # Example
+   # Example
 
-      $ git push origin --force --all
+   git push origin --force --all
 
-      # Counting objects: 1074, done.
-      # Delta compression using 2 threads.
-      # Compressing objects: 100% (677/677), done.
-      # Writing objects: 100% (1058/1058), 148.85 KiB, done.
-      # Total 1058 (delta 590), reused 602 (delta 378)
-      # To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-      #  + 48dc599...051452f master -> master (forced update)
+   # Counting objects: 1074, done.
+   # Delta compression using 2 threads.
+   # Compressing objects: 100% (677/677), done.
+   # Writing objects: 100% (1058/1058), 148.85 KiB, done.
+   # Total 1058 (delta 590), reused 602 (delta 378)
+   # To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+   #  + 48dc599...051452f master -> master (forced update)
    ```
 
 4. In order to remove the sensitive file from your tagged releases, you'll also need to force-push against your Git tags:
 
    ```Bash
-      git push origin --force --tags
+   git push origin --force --tags
    ```
 
    ```Bash
-      # Example
+   # Example
 
-      $ git push origin --force --tags
+   git push origin --force --tags
 
-      # Counting objects: 321, done.
-      # Delta compression using up to 8 threads.
-      # Compressing objects: 100% (166/166), done.
-      # Writing objects: 100% (321/321), 331.74 KiB | 0 bytes/s, done.
-      # Total 321 (delta 124), reused 269 (delta 108)
-      # To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-      #  + 48dc599...051452f master -> master (forced update)
+   # Counting objects: 321, done.
+   # Delta compression using up to 8 threads.
+   # Compressing objects: 100% (166/166), done.
+   # Writing objects: 100% (321/321), 331.74 KiB | 0 bytes/s, done.
+   # Total 321 (delta 124), reused 269 (delta 108)
+   # To https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+   #  + 48dc599...051452f master -> master (forced update)
    ```
 
 ## REVERT
@@ -1154,7 +1188,7 @@ If you already pushed the branch to remote
 - Sometimes you may want to undo a whole commit with all changes. Instead of going through all the changes manually, you can simply tell git to revert a commit, which does not even have to be the last one. Reverting a commit means to create a new commit that undoes all changes that were made in the bad commit. Just like above, the bad commit remains there, but it no longer affects the the current master and any future commits on top of it.
 
   ```bash
-    git revert {hash key}
+  git revert {hash key}
   ```
 
 # GITHUB GIST
@@ -1177,30 +1211,30 @@ If you already pushed the branch to remote
 - On `Terminal`:
 
   ```Bash
-    ssh-keygen -t rsa -C "your_new_email@gmail.com"
-    # Generating public/private rsa key pair.
-    # Enter file in which to save the key (/Users/roger-that/.ssh/id_rsa):
-    /Users/roger-that/.ssh/id_rsa_dev
-    # Enter passphrase (empty for no passphrase):
-    your_password
-    # Enter same passphrase again:
-    your_password
-    # Your identification has been saved in /Users/roger-that/.ssh/id_rsa_dev.
-    # Your public key has been saved in /Users/roger-that/.ssh/id_rsa_dev.pub.
-    # The key fingerprint is:
-    # SHA256:I60nfahisdhfiahsidfhiasdifhiashyH4 your_new_email@gmail.com
-    # The key's randomart image is:
-    # +---[RSA 3072]----+
-    # |                 |
-    # |                 |
-    # |                .|
-    # |       .       ..|
-    # |      k S    oo1.|
-    # |     o +..  .d%+=|
-    # |. . . =.c+  .-+*.|
-    # | p D =a*+.o  o...|
-    # |...  +Ffff +*f   |
-    # +----[SHA256]-----+
+  ssh-keygen -t rsa -C "your_new_email@gmail.com"
+  # Generating public/private rsa key pair.
+  # Enter file in which to save the key (/Users/roger-that/.ssh/id_rsa):
+  /Users/roger-that/.ssh/id_rsa_dev
+  # Enter passphrase (empty for no passphrase):
+  your_password
+  # Enter same passphrase again:
+  your_password
+  # Your identification has been saved in /Users/roger-that/.ssh/id_rsa_dev.
+  # Your public key has been saved in /Users/roger-that/.ssh/id_rsa_dev.pub.
+  # The key fingerprint is:
+  # SHA256:I60nfahisdhfiahsidfhiasdifhiashyH4 your_new_email@gmail.com
+  # The key's randomart image is:
+  # +---[RSA 3072]----+
+  # |                 |
+  # |                 |
+  # |                .|
+  # |       .       ..|
+  # |      k S    oo1.|
+  # |     o +..  .d%+=|
+  # |. . . =.c+  .-+*.|
+  # | p D =a*+.o  o...|
+  # |...  +Ffff +*f   |
+  # +----[SHA256]-----+
   ```
 
 ## Public SSH Key
@@ -1210,9 +1244,9 @@ If you already pushed the branch to remote
 - Copy your new public SSH key
 
   ```Bash
-    cat /Users/roger-that/.ssh/id_rsa_dev.pub
+  cat /Users/roger-that/.ssh/id_rsa_dev.pub
 
-    # ssh-rsa AAAAB3NzafskdlfajsdjflajsdlfjalsdfeqlZwxFV4kMKsc9t8lAyS3DKWfahsidfhahsdifhaids/IDY+kfhakjsdhfkahsdkfhakshdfkaksdfoausdofuaosdufoausdofuoausdofuaosdufoausodfoausdofuaosdufoausdofuasdaosudfoasidfouaosdufoausdofuasdou/fa9sdf89as7d9f7a9sdf9as7df97as9df7a0s9df7a09sdf78asd98bxchvbixcvbkhxckvbxkchvlbxjcvklbjxlcjvb;xjcvblkxjcvb;jx;cvbj;xclvjb;xcv;lxkcjvb/26/oKMPWEZdoR7wvLVmjORn10ZQsIvI3swnwyxB7pxkaj;lsdfjka;sldjf;aklsjdf;alksjdf;lajsd;lfja;sdjfk;lajsdfl;kajs;dfja;lsdjf;alksdjf;ajsYhyZkz1XjaCobqTN+asdfkljasldfjalsjdflajsldkfjlajsd;g1uo1/qUg/DM= your_new_email@gmail.com
+  # ssh-rsa AAAAB3NzafskdlfajsdjflajsdlfjalsdfeqlZwxFV4kMKsc9t8lAyS3DKWfahsidfhahsdifhaids/IDY+kfhakjsdhfkahsdkfhakshdfkaksdfoausdofuaosdufoausdofuoausdofuaosdufoausodfoausdofuaosdufoausdofuasdaosudfoasidfouaosdufoausdofuasdou/fa9sdf89as7d9f7a9sdf9as7df97as9df7a0s9df7a09sdf78asd98bxchvbixcvbkhxckvbxkchvlbxjcvklbjxlcjvb;xjcvblkxjcvb;jx;cvbj;xclvjb;xcv;lxkcjvb/26/oKMPWEZdoR7wvLVmjORn10ZQsIvI3swnwyxB7pxkaj;lsdfjka;sldjf;aklsjdf;alksjdf;lajsd;lfja;sdjfk;lajsdfl;kajs;dfja;lsdjf;alksdjf;ajsYhyZkz1XjaCobqTN+asdfkljasldfjalsjdflajsldkfjlajsd;g1uo1/qUg/DM= your_new_email@gmail.com
   ```
 
 ### Add SSH Key To GitHub
@@ -1242,12 +1276,12 @@ If you already pushed the branch to remote
 - Add the the new ssh key to our known key list
 
   ```Bash
-    ssh-add /Users/roger-that/.ssh/id_rsa_dev
+  ssh-add /Users/roger-that/.ssh/id_rsa_dev
 
-    # Enter passphrase for /Users/roger-that/.ssh/id_rsa_dev:
-    your_password
+  # Enter passphrase for /Users/roger-that/.ssh/id_rsa_dev:
+  your_password
 
-    # Identity added: /Users/roger-that/.ssh/id_rsa_dev (your_new_email@gmail.com)
+  # Identity added: /Users/roger-that/.ssh/id_rsa_dev (your_new_email@gmail.com)
   ```
 
 ### Config
@@ -1257,10 +1291,10 @@ If you already pushed the branch to remote
 - In `/Users/roger-that/.ssh/config` (create one if file doesn't exist)
 
   ```Bash
-    Host unique_name
-      HostName github.com
-      User your_new_github_user
-      IdentityFile /Users/roger-that/.ssh/id_rsa_dev
+  Host unique_name
+    HostName github.com
+    User your_new_github_user
+    IdentityFile /Users/roger-that/.ssh/id_rsa_dev
   ```
 
 ### Add New Project Origin
@@ -1270,13 +1304,13 @@ If you already pushed the branch to remote
 - We need to set our remote origin slightly different
 
   ```Bash
-    # If you don't have set the origin
-    git remote add origin git@unique_name:/roger-takeshita-dev/codebase.git
+  # If you don't have set the origin
+  git remote add origin git@unique_name:/roger-takeshita-dev/codebase.git
 
-    # OR
+  # OR
 
-    # If you cloned from github
-    git remote set-url origin git@unique_name:/roger-takeshita-dev/codebase.git
+  # If you cloned from github
+  git remote set-url origin git@unique_name:/roger-takeshita-dev/codebase.git
   ```
 
 # HEROKU
@@ -1288,7 +1322,7 @@ If you already pushed the branch to remote
 [Go Back to Summary](#contents)
 
 ```Bash
-  heroku login
+heroku login
 ```
 
 ### Create App
@@ -1296,7 +1330,7 @@ If you already pushed the branch to remote
 [Go Back to Summary](#contents)
 
 ```Bash
-  heroku create <app_name>
+heroku create <app_name>
 ```
 
 ### Associate Existing Heroku App
@@ -1304,7 +1338,7 @@ If you already pushed the branch to remote
 [Go Back to Summary](#contents)
 
 ```Bash
-  heroku git:remote -a <app_name>
+heroku git:remote -a <app_name>
 ```
 
 ## DEPLOY
@@ -1314,7 +1348,7 @@ If you already pushed the branch to remote
 [Go Back to Summary](#contents)
 
 ```Bash
-  git push heroku master
+git push heroku master
 ```
 
 ### Deploy to GitHub - Subtree
@@ -1322,7 +1356,7 @@ If you already pushed the branch to remote
 [Go Back to Summary](#contents)
 
 ```Bash
-  git subtree push --prefix path/to/subdirectory heroku master
+git subtree push --prefix path/to/subdirectory heroku master
 ```
 
 - where `path/to/subdirectory` is the path to the project that you want to deploy to heroku
@@ -1330,5 +1364,5 @@ If you already pushed the branch to remote
   - Inside we have a folder called `2_GraphQL_Prisma` (we want to deploy this folder)
 
 ```Bash
-    git subtree push --prefix 2_GraphQL_Prisma heroku master
+git subtree push --prefix 2_GraphQL_Prisma heroku master
 ```
